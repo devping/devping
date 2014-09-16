@@ -20,7 +20,8 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @EnableTransactionManagement
 @Import({DevPingRepositoryConfig.class})
 @ComponentScan(basePackageClasses = {DevPingDomains.class})
-public class DevPingDomainApplicationContextConfiguration implements TransactionManagementConfigurer {
+public class DevPingDomainApplicationContextConfiguration {
+//        implements TransactionManagementConfigurer {
 
 
     @Autowired
@@ -36,12 +37,12 @@ public class DevPingDomainApplicationContextConfiguration implements Transaction
         return new ConfigurationProperties(environment);
     }
 
-    @Qualifier("transactionManager")
-    @Autowired
-    private PlatformTransactionManager transactionManager;
-
-    @Override
-    public PlatformTransactionManager annotationDrivenTransactionManager() {
-        return transactionManager;
-    }
+//    @Qualifier("transactionManager")
+//    @Autowired
+//    private PlatformTransactionManager transactionManager;
+//
+//    @Override
+//    public PlatformTransactionManager annotationDrivenTransactionManager() {
+//        return transactionManager;
+//    }
 }

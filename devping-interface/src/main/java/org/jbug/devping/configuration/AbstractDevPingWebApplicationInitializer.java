@@ -37,7 +37,7 @@ public abstract class AbstractDevPingWebApplicationInitializer implements WebApp
     public static final String LOGBACK_OVERRIDE_PROPERTY_NAME = "logback.override";
 
     /** Root Application Context 적재시 Initializer Class */
-//    public static final Class<?> APPLICATION_CONTEXT_INITIALIZER_CLASS = InterfacesConfigurationPropertiesApplicationContextInitializer.class;
+    public static final Class<?> APPLICATION_CONTEXT_INITIALIZER_CLASS = InterfacesConfigurationPropertiesApplicationContextInitializer.class;
 
     /**
      * Logback 설정을 프로필에 따라 차등 적재한다.
