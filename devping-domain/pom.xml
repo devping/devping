@@ -53,6 +53,12 @@
         </dependency>
 
 
+        <dependency>
+        	<groupId>edu.princeton.cs.introcs</groupId>
+        	<artifactId>algs4-package</artifactId>
+        	<version>1.0</version>
+        	<scope>runtime</scope>
+        </dependency>
     </dependencies>
 
 
