@@ -8,7 +8,7 @@ devping
    ```sh
    cd PATH/TO/devping-domain/lib
    mvn install:install-file -Dfile=stdlib-package.jar -DgroupId=edu.princeton.cs.introcs -DartifactId=stdlib-package -Dversion=1.0 -Dpackaging=jar
-   ```sh
+   ```
 
 
 
