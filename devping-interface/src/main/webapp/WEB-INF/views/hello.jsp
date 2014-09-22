@@ -170,7 +170,7 @@ but we stick to percentage values for demo purposes. */
 						class="ui-li-thumb">
 						<h2>Web pallete</h2>
 						<p>Code automation web tool, developed using Jquery Mobile</p>
-						<p class="ui-li-aside">Pallete Web</p>
+						<p class="ui-li-aside">Web</p>
 				</a></li>
 				<li><a href="http://m.google.com"> 
 				<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn%3AANd9GcQ66ECCYoaxJPUlW8vavxUqyhsRmsO0xraHY7MryWfejqT_fqZW" class="ui-li-thumb">
@@ -182,19 +182,19 @@ but we stick to percentage values for demo purposes. */
 				<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn%3AANd9GcSron4XcMyNEbwJ4n_Jtg_ZFnsZPS1QlbVNzPytxnphX09IDlcF" class="ui-li-thumb">
 						<h2>Mobile Application</h2>
 						<p>Mobile Application Developer</p>
-						<p class="ui-li-aside">Mobile Application</p>
+						<p class="ui-li-aside">Mobile</p>
 				</a></li>
 				<li><a href="http://m.google.com"> 
 				<img src="http://beageek.biz/wp-content/uploads/backbone-js.gif" class="ui-li-thumb">
 						<h2>Backbone.js</h2>
 						<p>Javascript Developer</p>
-						<p class="ui-li-aside">Backbone.js</p>
+						<p class="ui-li-aside">Javascript</p>
 				</a></li>
 				<li><a href="http://m.google.com"> 
 				<img src="http://www.ddaily.co.kr/data/photos/20110623/20110623173423__SEMAL.jpg" class="ui-li-thumb">
 						<h2>Touch Pad UI</h2>
 						<p>UI Developer</p>
-						<p class="ui-li-aside">Touch Pad UI</p>
+						<p class="ui-li-aside">UI</p>
 				</a></li>
 			</ul>
 		</div>
