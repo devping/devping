@@ -46,6 +46,7 @@
         	<artifactId>devping-common</artifactId>
         	<version>1.0-SNAPSHOT</version>
         </dependency>
+		
         <dependency>
             <groupId>edu.princeton.cs.introcs</groupId>
             <artifactId>stdlib-package</artifactId>
@@ -60,6 +61,13 @@
         	<scope>runtime</scope>
         </dependency>
     </dependencies>
-
+	
+	<repositories>
+  		<repository>
+    		<id>org.coursera.algs4</id>
+    		<name>Algs4 coursera course custom repository</name>
+    		<url>https://raw.github.com/slok/algs4-mvn-repo/master</url>
+  		</repository>
+	</repositories>
 
 </project>
