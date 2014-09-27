@@ -107,6 +107,7 @@ local.properties
 .loadpath
 .project
 .classpath
+target/
 
 # External tool builders
 .externalToolBuilders/
