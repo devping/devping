@@ -7,39 +7,55 @@
 //		}
 //	}
 //});
-
-devPingApp.controller('SummaryController', function ($scope, summaryService) {
+devPingApp.controller('PingPongController', function($scope, pingPongService){
 	init();
 	function init(){
-		$scope.summary = summaryService.getSummary();
+//get user info - require login part
+		$scope.user = {
+			id: 'guest',
+			poing: 0
+		};
+		$scope.myRoomList = [];
+		$scope.chatList = {};
+		$scope.userList = {};
+		$scope.roomId;
+		$scope.pingCountdown = 30;
+		$scope.pongCount = 0;
 	};
-});
-
-devPingApp.controller('PingSearchController', function($scope, $http, pingSearchService){
-	init();
-	function init(){
-		$scope.tags = pingSearchService.getMoreSelectedTags();
+	
+	$scope.ping = function($event) {
+		//set room info
+		var dt = new Date();
+		var room = {
+			time: dt.getFullYear() + '-' + (dt.getMonth()+1) + '-' + dt.getDate()
+				+ ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds(),
+			tagList: $scope.pingTags,
+			question: $scope.pingQuestion
+		};
+		pingPongService.ping(room, $scope);
 	};
-	$scope.selectedTag = function($event, nowSelectedTags, tag){
-		$scope.nowSelectedTags = pingSearchService.addTag(nowSelectedTags, tag);
-		
-		console.log("client request : " + $scope.nowSelectedTags);
-		$http.post(
-				urlBase+'searchExperts.do',
-				'data='+$scope.nowSelectedTags
-		).success(function(result){
-					console.log(result);
-		});
+	
+	$scope.changeRoom = function(roomId){
+		$scope.roomId = roomId;
 	};
-	$scope.searchExperts = function(){
-		$scope.proposeExperts = pingSearchService.searchExperts();
+	
+	$scope.sendMessage = function(){
+		//create message
+		var dt = new Date();
+		var message = {
+			time: dt.getFullYear() + '-' + (dt.getMonth()+1) + '-' + dt.getDate()
+				+ ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds(),
+			user: 'I',
+			content: $scope.myMessage,
+			roomId: $scope.roomId
+		};
+		//send message
+		pingPongService.sendMessage(message);
+		//input message to chat frame
+		$scope.chatList[$scope.roomId].push(message);
 	};
-});
-
-devPingApp.controller('PingQuestionController', function($scope, summaryService, pingSearchService){
-	init();
-	function init(){
-		$scope.summary = summaryService.getSummary();
-		$scope.selectedExperts = pingSearchService.getExpertGroup();
+	
+	$scope.pong = function(){
+		pingPongService.pong($scope.user.id);
 	};
 });
