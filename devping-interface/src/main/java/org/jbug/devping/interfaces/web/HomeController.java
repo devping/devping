@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Handles requests for the application home page.
  */
 @Controller
-@RequestMapping(value = "/home")
+@RequestMapping(value = "/")
 public class HomeController {
 	
 private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
