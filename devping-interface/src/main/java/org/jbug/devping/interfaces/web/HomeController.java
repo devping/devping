@@ -15,39 +15,33 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Handles requests for the application home page.
  */
 @Controller
+@RequestMapping(value = "/home")
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	private int id = 0;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping({
-		"main"
-	})
+	@RequestMapping({"","main"})
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		return "home";
 	}
 	
-	@RequestMapping(value="/ping-search")
-	public String pingSearch(Locale locale, Model model) {
-		logger.info("Welcome ping-search! The client locale is {}.", locale);
-		return "ping/search";
-	}
-	
-	@RequestMapping(value="/ping-write")
-	public String pingQuestion(Locale locale, Model model) {
-		logger.info("Welcome ping-write! The client locale is {}.", locale);
-		return "ping/question";
-	}
-	
-	@RequestMapping(value = "/searchExperts.do", method = RequestMethod.POST)
-	public @ResponseBody String searchExperts(Locale locale, @RequestParam("data") String data) {
-		logger.info("Welcome searchExperts! The client locale is {}.", locale);
-		
+	@RequestMapping(value = "/ping.do", method = RequestMethod.POST)
+	public @ResponseBody String ping(Locale locale, @RequestParam("data") String data) {
+		logger.info("server get Ping");
 		logger.info(data.toString());
-		
-		return "server return : " + data;
+		return String.valueOf(id++);
+	}
+	
+	@RequestMapping(value = "/sendMessage.do", method = RequestMethod.POST)
+	public @ResponseBody String sendMessage(Locale locale, @RequestParam("data") String data) {
+		logger.info("server get message!");
+		logger.info(data.toString());
+		return "server get message!";
 	}
 }
