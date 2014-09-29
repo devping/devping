@@ -43,8 +43,8 @@ public abstract class AbstractDevPingWebMvcConfig extends WebMvcConfigurationSup
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
     	registry.addResourceHandler(DEFAULT_RESOURCES_PATH).addResourceLocations(DEFAULT_RESOURCE_LOCATION);
-//        addErrorResourceHandler(registry);
-//        super.addResourceHandlers(registry);
+        addErrorResourceHandler(registry);
+        super.addResourceHandlers(registry);
     }
 
     /**
