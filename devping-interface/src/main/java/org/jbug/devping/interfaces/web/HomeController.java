@@ -1,11 +1,13 @@
 package org.jbug.devping.interfaces.web;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,14 +34,14 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	}
 	
 	@RequestMapping(value = "/ping.do", method = RequestMethod.POST)
-	public @ResponseBody String ping(Locale locale, @RequestParam("data") String data) {
+	public @ResponseBody String ping(Locale locale, @RequestBody HashMap data) {
 		logger.info("server get Ping");
 		logger.info(data.toString());
 		return String.valueOf(id++);
 	}
 	
 	@RequestMapping(value = "/sendMessage.do", method = RequestMethod.POST)
-	public @ResponseBody String sendMessage(Locale locale, @RequestParam("data") String data) {
+	public @ResponseBody String sendMessage(Locale locale, @RequestBody HashMap data) {
 		logger.info("server get message!");
 		logger.info(data.toString());
 		return "server get message!";

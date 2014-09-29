@@ -1,9 +1,11 @@
 devPingApp.service('pingPongService', function($http){
 	this.ping = function(room, $scope){
-		$http.post(
-				urlBase+'ping.do',
-				'data='+room
-		).success(function(result){
+		$http({
+			url: urlBase+'ping.do',
+			method: "POST",
+			data: JSON.stringify( room ),
+			headers: {'Content-Type': 'application/json'}
+		}).success(function(result){
 			//create room
 			$scope.roomId = result;
 			$scope.chatList[result] = [];
@@ -14,26 +16,37 @@ devPingApp.service('pingPongService', function($http){
 			//log
 			console.log($scope.myRoomList);
 			console.log($scope.roomId);
+		}).error(function (error) {
+			console.log(error);
 		});
 	};
 	
 	this.sendMessage = function(message){
 //set user info
-		$http.post(
-			urlBase+'sendMessage.do',
-			'data='+message
-		).success(function(result){
+		$http({
+			url: urlBase+'sendMessage.do',
+			method: "POST",
+			data: JSON.stringify( message ),
+			headers: {'Content-Type': 'application/json'}
+		}).success(function(result){
 			//log
 			console.log(result);
+		}).error(function (error) {
+			console.log(error);
 		});
 	};
 	
 	this.pong = function(userId){
-		$http.post(
-				urlBase+'pong.do',
-				'data='+userId
-		).success(function(result){
+		$http({
+			url: urlBase+'pong.do',
+			method: "POST",
+			data: JSON.stringify( userId ),
+			headers: {'Content-Type': 'application/json'}
+		}).success(function(result){
+			//log
 			console.log(result);
+		}).error(function (error) {
+			console.log(error);
 		});
 	};
 });
