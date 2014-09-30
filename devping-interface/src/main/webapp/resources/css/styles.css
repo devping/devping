@@ -1,0 +1,236 @@
+@CHARSET "UTF-8";
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+html {
+	top: 0; left: 0; right: 0; bottom: 0;
+	width: 100%; height: 100%;
+}
+body {
+	width: 100%;
+	height: 100%;
+	color: #797979;
+	background: #f1f2f7;
+	padding: 0px !important;
+	margin: 0px !important;
+	font-size: 13px;
+	font: normal normal normal 15px 'Nanum Gothic';
+}
+textarea {	resize: none;	}
+ul li {	list-style: none;	}
+#container {
+	width: 100%;
+	height: 100%;
+}
+.header {
+	position: fixed;
+	left: 0;
+	right: 0;
+	z-index: 1002;
+}
+.header, .footer {
+	min-height: 60px;
+	padding: 0 15px;
+}
+.sidebar-toggle-box {
+	float: left;
+	padding-right: 15px;
+	margin-top: 20px;
+}
+.sidebar-toggle-box .fa-bars {
+	cursor: pointer;
+	display: inline-block;
+	font-size: 20px;
+}
+a.logo {
+	font-size: 21px;
+	color: #2e2e2e;
+	float: left;
+	margin-top: 15px;
+	text-transform: uppercase;
+}
+a, a:hover, a:focus {
+	text-decoration: none;
+	outline: none;
+}
+#jb-c-navbar-colleapse {
+	margin-top: 75px;
+	width: 210px;
+	height: 100%;
+	position: fixed;
+	background: #2a3542;
+}
+.jb-c-info {
+	display:block;
+	width: 130px;
+	height: 130px;
+	border: 5px solid #fff;
+	color: #fff;
+	text-align: center;
+}
+.jb-c-info-square {
+	margin-top: 30px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+.jb-c-info-circle {
+	margin-top: 20px;
+	border-radius: 70px;
+	-webkit-border-radius: 70px;
+	-khtml-border-radius: 70px;
+	-moz-border-radius: 70px;
+}
+.jb-c-info span {
+	display: block;
+	font-size: 2em;
+}
+.jb-c-badge-border {
+	position: relative;
+}
+.jb-c-sub-menu .jb-c-badge-border .badge {
+	position: absolute;
+	top: 30px;
+	left: 80px;
+}
+.badge.jb-c-bg-important {
+	background: #ff6c60;
+}
+.badge.jb-c-bg-success {
+	background: #a9d86e;
+}
+
+#jb-c-main-content {
+	padding-top: 75px;
+	padding-left: 210px;
+	height: 100%;
+	display: inline-block;
+	width: 100%;
+}
+#jb-c-content-view {
+	border-collapse: collapse;
+	border-spacing: 0;
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+	position: relative;
+	height: 100%;
+}
+#jb-c-content-view aside {
+	display: table-cell;
+	float: none;
+	height: 100%;
+	padding: 0;
+	vertical-align: top;
+}
+#jb-c-chatting-grouptac-view {
+	width: 15%;
+	background: #e5e8ef;
+	border-radius: 4px 0 0 4px;
+	-webkit-border-radius: 4px 0 0 4px;
+}
+#jb-c-chatting-grouptac-head {
+	background: #00A8B3;
+	border-radius: 4px 0 0;
+	-webkit-border-radius: 4px 0 0;
+	color: #FFFFFF;
+	min-height: 70px;
+	padding: 15px;
+}
+#jb-c-chatting-grouptac-head h3 {
+	margin: 6px 0 0 0;
+	font-weight: 100;
+	letter-spacing: 1px;
+}
+.jb-c-chat-list {
+	padding: 0;
+}
+.jb-c-chat-list .active {
+	color: #00a9b4;
+	background: #f2f4f7;
+}
+.jb-c-chat-item {
+	color: #6a6a6a;
+	display: block;
+	padding: 15px;
+	font-weight: 300;
+	padding-left: 30px;
+}
+#jb-c-chatting-view {
+	width: 70%;
+	background: #fff;
+	border-right: 1px solid #e5e8ef;
+}
+#jb-c-chatting-view-head {
+	background: #41CAC0;
+	color: #FFFFFF;
+	min-height: 70px;
+	padding: 15px;
+}
+#jb-c-chatting-view-head h3 {
+	margin: 5px 0 0;
+	font-weight: 100;
+	letter-spacing: 1px;
+	display: inline-block;
+}
+.jb-c-chatting {
+	width: 100%;
+	float: left;
+	border-bottom: 1px solid #eaebee;
+}
+.jb-c-chatting .first-part.odd {
+	background: #f7f8fa;
+	color: #6a6a6a;
+	font-weight: 600;
+}
+.jb-c-chatting .first-part {
+	width: 25%;
+}
+.jb-c-chatting .second-part {
+	width: 60%;
+}
+.jb-c-chatting .third-part {
+	width: 15%;
+	color: #d4d3d3;
+}
+.jb-c-chatting .first-part, .jb-c-chatting .second-part, .jb-c-chatting .third-part {
+	float: left;
+	padding: 15px;
+}
+#jb-c-chatting-view footer {
+	background: #f6f6f6;
+	padding: 15px;
+	height: 70px;
+	width: 70%;
+	position: absolute;
+	bottom: 0;
+	border-right: 1px solid #E5E8EF;
+}
+.jb-c-chatting-box {
+	float: left;
+	width: 90%;
+	margin-right: 5px;
+}
+#jb-c-user-view {
+	width: 15%;
+	background: #fff;
+	border-radius: 0 4px 4px 0;
+	-webkit-border-radius: 0 4px 4px 0;
+}
+#jb-c-user-view-head {
+	background: #00A8B3;
+	border-radius: 0 4px 0 0;
+	-webkit-border-radius: 0 4px 0 0;
+	color: #FFFFFF;
+	min-height: 70px;
+	padding: 10px;
+	border-left: 1px solid #00A8B3;
+	margin-left: -1px;
+	position: relative;
+}
+.jb-c-chat-available-user {
+	padding: 10px;
+}
+.jb-c-chat-available-user li {
+	margin-bottom: 15px;
+}

@@ -28,7 +28,7 @@ public abstract class AbstractDevPingWebMvcConfig extends WebMvcConfigurationSup
 
     public static final String RESOURCE_PATH_BASE = "/resources/";
     public static final String DEFAULT_RESOURCES_PATH = RESOURCE_PATH_BASE + "**";
-    public static final String DEFAULT_RESOURCE_LOCATION = "/WEB-INF/resources/";
+    public static final String DEFAULT_RESOURCE_LOCATION = "/resources/";
 
     public static final String ERROR_RESOURCE_PATH = "/error-resources/**";
     public static final String ERROR_RESOURCE_LOCATION = "/WEB-INF/error-resources/";
@@ -42,6 +42,7 @@ public abstract class AbstractDevPingWebMvcConfig extends WebMvcConfigurationSup
      */
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+    	registry.addResourceHandler(DEFAULT_RESOURCES_PATH).addResourceLocations(DEFAULT_RESOURCE_LOCATION);
         addErrorResourceHandler(registry);
         super.addResourceHandlers(registry);
     }

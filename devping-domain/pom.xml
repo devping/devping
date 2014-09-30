@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -97,6 +98,12 @@
             <version>${jcloverslf4j.version}</version>
         </dependency>
 	</dependencies>
-
+        <repositories>
+                <repository>
+                <id>org.coursera.algs4</id>
+                <name>Algs4 coursera course custom repository</name>
+                <url>https://raw.github.com/slok/algs4-mvn-repo/master</url>
+                </repository>
+        </repositories>
 
 </project>

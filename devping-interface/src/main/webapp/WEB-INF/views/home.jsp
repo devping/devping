@@ -7,7 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>DevPing</title>
-	<link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet" />
+	<link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet" media="screen"/>
 	<link href='http://fonts.googleapis.com/css?family=Fredericka+the+Great|Chelsea+Market|Enriqueta' rel='stylesheet' type='text/css'>
 	<link href="<c:url value="/resources/css/styles.css"/>" rel="stylesheet" />
 	<!--[if lt IE 9]>
@@ -16,19 +16,142 @@
 	<style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style>
 </head>
 <body>
-	<header class="navbar navbar-default navbar-fixed-top" data-ng-controller="SummaryController">
-		<div class="container">
-			<div class="navbar-inner jb-title-font">
-				DevPing
-				<div class="pull-right jb-summary-unit">
-					<label>{{ summary.name }}</label><br/>
-					<label>Point : {{ summary.point }}</label>
+	<section id="container"
+		data-ng-controller="PingPongController">
+		<header class="header">
+<!--Not yet 'side menu toogle'-->
+			<div class="sidebar-toggle-box">
+				<div data-original-title="Toggle Navigation" data-placement="right" class="fa fa-bars tooltips"></div>
+			</div>
+			<a href="main" class="logo">DevPing</a>
+		</header>
+		<aside>
+			<div id="jb-c-navbar-colleapse" class="nav-collapse" tabindex="5000" style="overflow: hidden; outline: none;">
+				<ul>
+<!--Not yet 'My Info'-->
+					<li class="jb-c-sub-menu">
+						<div class="jb-c-info jb-c-info-square">
+							<i class="jb-c-info-square-in"></i>
+							<span>My Info</span>
+						</div>
+					</li>
+					<li class="jb-c-sub-menu">
+						<div class="jb-c-badge-border">
+							<span class="badge jb-c-bg-important">{{ pingCountdown }}</span>
+						</div>
+						<button class="btn btn-primary jb-c-info jb-c-info-circle"
+							data-toggle="modal" data-target="#pingModal">
+							<span>PING</span>
+						</button>
+					</li>
+					<li class="jb-c-sub-menu">
+						<div class="jb-c-badge-border">
+							<span class="badge jb-c-bg-success">{{ pongCount }}</span>
+						</div>
+						<button class="btn btn-primary jb-c-info jb-c-info-circle"
+							data-toggle="modal" data-target="#pongModal">
+							<span>PONG</span>
+						</button>
+					</li>
+				</ul>
+			</div>
+		</aside>
+		<section id="jb-c-main-content">
+			<div id="jb-c-content-view">
+				<aside id="jb-c-chatting-grouptac-view">
+					<div id="jb-c-chatting-grouptac-head">
+						<h3>Room</h3>
+					</div>
+					<ul class="jb-c-chat-list">
+						<li data-ng-class="{'active': room.roomId == roomId}"
+							data-ng-repeat="room in myRoomList | orderBy:'time':reverse=true">
+							<div class="jb-c-chat-item"
+								data-ng-click="changeRoom(room.roomId)">
+								<span>{{ room.roomId }} {{ room.tagList }}</span>
+								<span class="badge pull-right">0</span>
+							</div>
+						</li>
+					</ul>
+				</aside>
+				<aside id="jb-c-chatting-view">
+					<div id="jb-c-chatting-view-head">
+						<h3>Chat {{ roomId }}</h3>
+					</div>
+					<div class="jb-c-chatting"
+						data-ng-repeat="chat in chatList[roomId] | orderBy:'time'">
+						<div class="first-part odd">{{ chat.user }}</div>
+						<div class="second-part">{{ chat.content }}</div>
+						<div class="third-part">{{ chat.time }}</div>
+					</div>
+					<footer data-ng-show="chatInputChecked">
+						<div class="jb-c-chatting-box">
+							<input type="text" class="form-control"
+								data-ng-model="myMessage">
+						</div>
+						<button class="btn btn-danger full-right"
+							data-ng-click="sendMessage()">Send</button>
+					</footer>
+				</aside>
+				<aside id="jb-c-user-view">
+					<div id="jb-c-user-view-head"></div>
+					<ul class="jb-c-chat-available-user">
+						<li data-ng-repeat="user in userList[roomId] | orderBy:'id'">
+							{{ user.id }}
+						</li>
+					</ul>
+				</aside>
+			</div>
+		</section>
+		<!-- Modal -->
+		<div class="modal fade" id="pingModal" tabindex="-1" role="dialog"
+			aria-labelledby="Ping" aria-hidden="true" data-backdrop="static">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						</button>
+						<h4 class="modal-title" id="pingModalLabel">Ping</h4>
+					</div>
+					<div class="modal-body">
+						<div>
+							<label for="tag-group">tag</label>
+							<input class="form-control input-lg" id="tag-group" type="text" placeholder="C, C++, java..."
+								data-ng-model="pingTags">
+						</div>
+						<div>
+							<textarea class="form-control" rows="10"
+								data-ng-model="pingQuestion"></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal"
+							data-ng-click="ping($event)">Ping</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</header>
-
-	<div data-ng-view=""></div>
+		<div class="modal fade" id="pongModal" tabindex="-1" role="dialog"
+			aria-labelledby="Pong" aria-hidden="true" data-backdrop="static">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						</button>
+						<h4 class="modal-title" id="pongModalLabel">Pong</h4>
+					</div>
+					<div class="modal-body">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Pong</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<!-- Vendor Libs: jQuery only used for Bootstrap functionality -->
 	<script src="<c:url value="/resources/lib/angular.min.js"/>"></script>
