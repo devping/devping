@@ -56,7 +56,6 @@
 				</ul>
 			</div>
 		</aside>
-	
 		<section id="jb-c-main-content">
 			<div id="jb-c-content-view">
 				<aside id="jb-c-chatting-grouptac-view">
@@ -64,9 +63,13 @@
 						<h3>Room</h3>
 					</div>
 					<ul class="jb-c-chat-list">
-						<li class="active"
+						<li data-ng-class="{'active': room.roomId == roomId}"
 							data-ng-repeat="room in myRoomList | orderBy:'time':reverse=true">
-							<div data-ng-click="changeRoom(room.roomId)">{{ room.roomId }} {{ room.tagList }}</div>
+							<div class="jb-c-chat-item"
+								data-ng-click="changeRoom(room.roomId)">
+								<span>{{ room.roomId }} {{ room.tagList }}</span>
+								<span class="badge pull-right">0</span>
+							</div>
 						</li>
 					</ul>
 				</aside>
@@ -79,8 +82,8 @@
 						<div class="first-part odd">{{ chat.user }}</div>
 						<div class="second-part">{{ chat.content }}</div>
 						<div class="third-part">{{ chat.time }}</div>
-					</div>					
-					<footer>
+					</div>
+					<footer data-ng-show="chatInputChecked">
 						<div class="jb-c-chatting-box">
 							<input type="text" class="form-control"
 								data-ng-model="myMessage">

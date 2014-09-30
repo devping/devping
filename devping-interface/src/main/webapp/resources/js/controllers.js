@@ -7,7 +7,7 @@
 //		}
 //	}
 //});
-devPingApp.controller('PingPongController', function($scope, pingPongService){
+devPingApp.controller('PingPongController', function($scope, $interval, pingPongService){
 	init();
 	function init(){
 //get user info - require login part
@@ -19,11 +19,15 @@ devPingApp.controller('PingPongController', function($scope, pingPongService){
 		$scope.chatList = {};
 		$scope.userList = {};
 		$scope.roomId;
-		$scope.pingCountdown = 30;
+		$scope.pingCountdown = 0;
 		$scope.pongCount = 0;
+		
+		$scope.chatInputChecked = false;
 	};
 	
 	$scope.ping = function($event) {
+		//set room timeout
+		$scope.pingCountdown = 30;
 		//set room info
 		var dt = new Date();
 		var room = {
@@ -33,6 +37,13 @@ devPingApp.controller('PingPongController', function($scope, pingPongService){
 			question: $scope.pingQuestion
 		};
 		pingPongService.ping(room, $scope);
+		
+		//visible input box
+		$scope.chatInputChecked = true;
+		
+		$interval(function(){
+			$scope.pingCountdown--;
+		}, 1000, 30);
 	};
 	
 	$scope.changeRoom = function(roomId){
