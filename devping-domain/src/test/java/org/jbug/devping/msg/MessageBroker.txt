@@ -1,0 +1,25 @@
+Message Broker
+메시지 브로커는 채팅방마다 참여한 사람들의 아이디를 관리하며, 메시지를 보내고 받을 때 중간에서 받을 사람/보낼 사람을 알려주는 역활
+채팅방을 열고, 닫고, 메세지를 보내고, 받는 전반적인 역활을 한다.
+
+상세 기능
+- 채널 ID(채팅방) 을 생성
+- 채널 ID와 참여중인 멤버 관리.
+- 핑 보내기
+- 퐁 처리
+  - 멤버를 추가후, 입장 메시지를 보내기
+  - PersonCache(TreeCache)를 이용하여 모든 멤버들의 채널 ID를 추가함.
+  예) /people/ljhiyh            ==> FQN    (개인)
+     /people/ljhiyh/info       ==> FQN    (개인정보)
+     /people/ljhiyh/channels   ==> FQN    (채팅방들:Channel ID)
+     /people/ljhiyh/channels/ljhiyh_tag_028472283   ==> FQN (채팅방)
+     /people/ljhiyh/channels/ljhiyh_tag_028472283/1   ==> key (메세지) - (1:"ljhiyh가 입장하셨습니다.")
+
+
+
+PersonCache(TreeCache) 상세기능
+ - FQN 생성
+ - FQN 추가
+ - FQN 삭제
+ - Key,value 추가
+ - AtomicInteger
