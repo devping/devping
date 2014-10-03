@@ -15,7 +15,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
-@Import({DevPingRepositoryConfig.class})
+@Import({DevPingRepositoryConfig.
+        class})
 @ComponentScan(basePackageClasses = {DevPingDomains.class,
         DevPingCacheConfig.class})
 public class DevPingDomainApplicationContextConfiguration {

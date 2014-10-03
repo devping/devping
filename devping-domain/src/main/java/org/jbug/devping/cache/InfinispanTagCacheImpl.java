@@ -16,13 +16,18 @@ import java.util.Set;
 
 public class InfinispanTagCacheImpl implements TagCache {
     final static Logger logger = LoggerFactory.getLogger(InfinispanTagCacheImpl.class);
-    private final String CONFIG_FILE = "hotrod.properties";
+    private String CONFIG_FILE = "hotrod-server.properties";
     private RemoteCacheManager remoteCacheManager;
 	private RemoteCache<String, Set<String>> treeCache;
 
     public InfinispanTagCacheImpl() {
+        String configFile = System.getProperty("infinispan.hotrod");
+        if(configFile != null)
+            CONFIG_FILE = configFile;
+
         if(remoteCacheManager == null)
             init();
+
     }
 
     private void init(){
