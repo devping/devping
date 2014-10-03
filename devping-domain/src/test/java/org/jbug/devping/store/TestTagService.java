@@ -1,4 +1,4 @@
-package org.jbug.devping.tag;
+package org.jbug.devping.store;
 
 import org.jbug.devping.configuration.DevPingCacheConfig;
 import org.jbug.devping.configuration.DevPingDomainApplicationContextConfiguration;
@@ -60,12 +60,12 @@ public class TestTagService {
 //		tagService.LoginUpdateTagService(user3);
 //		assertEquals(12, tagTree.size());
 //
-//		// Check user list for each tag
+//		// Check user list for each store
 //		assertEquals(3, ((Set) tagCache.get("java")).size());
 //		assertEquals(2, ((Set) tagCache.get("jboss")).size());
 //		assertEquals(2, ((Set) tagCache.get("레드")).size());
 //
-//		// Check user name for each tag
+//		// Check user name for each store
 //		assertEquals("[jooho, ljhiyh]", ((Set) tagCache.get("jboss")).toString());
 //
 //	}
@@ -132,7 +132,7 @@ public class TestTagService {
 	}
 
 	/*
-	 * Tag Search with prefix - 같은 글자로 시작되는 tag 리턴. - 랭크순으로 5개의 Tag list 리턴.
+	 * Tag Search with prefix - 같은 글자로 시작되는 store 리턴. - 랭크순으로 5개의 Tag list 리턴.
 	 */
 	public Set<String> TagPrefixSearchService(String character) {
 		return new LinkedHashSet<>();

@@ -1,6 +1,6 @@
 package org.jbug.devping.service;
 
-import org.jbug.devping.tag.TagStore;
+import org.jbug.devping.store.TagStore;
 import org.jbug.devping.vo.UserVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

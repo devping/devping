@@ -102,7 +102,7 @@ public class TagTestController{
 
     @RequestMapping(value = "/findPeopleWithTag",method = RequestMethod.POST)
     public ModelAndView findPeopleWithTagTest(String tag){
-        //결과값 확인( tag )
+        //결과값 확인( store )
         TreeSet<String> peopleWithTag= tagService.findPeopleWithTag(tag);
         ModelAndView model = new ModelAndView("tagTestResult");
             model.addObject("peopleWithTag", peopleWithTag);

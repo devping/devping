@@ -1,7 +1,7 @@
-package org.jbug.devping.tag;
+package org.jbug.devping.store;
 
 import edu.princeton.cs.algs4.TST;
-import org.jbug.devping.cache.TagCache;
+import org.jbug.devping.cache.ITagCache;
 import org.jbug.devping.configuration.DevPingCacheConfig;
 import org.jbug.devping.configuration.DevPingDomainApplicationContextConfiguration;
 import org.jbug.devping.vo.UserVo;
@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
  *  - search
  *  - filter (and , xor)
  *  - remove (but only related users will be removed, 
- *              which means it will never removed once tag is registered)
+ *              which means it will never removed once store is registered)
  *              
  *	- rank 
  *		- top 20 tags that people have input. In other words, people have been looking for.
@@ -34,19 +34,19 @@ public class TestTag {
 
     /*
      * Architecture : WAS ---------> Infinispan (2 caches) - TagListTreeCache
-     * (Using tries algorithm, tag will be stored as a tree for searching) -
+     * (Using tries algorithm, store will be stored as a tree for searching) -
      * TagListCache (Store tags when client log in. Type is
-     * ("username","SET Object(tag)")
+     * ("username","SET Object(store)")
      *
      * Flow : Basic condition) Tag put ==> SYNC, TagList put ==> ASYNC, TagList
      * get ==>SYNC ex) ljhiyh = java, was, weblogic, jboss, websphere - Put
-     * individual tag list 1. A client log in DevPing. 2. Create SET Object.
-     * ("username","SET Object(tag)") : Set tagList = new HashSet(); 3. Get
+     * individual store list 1. A client log in DevPing. 2. Create SET Object.
+     * ("username","SET Object(store)") : Set tagList = new HashSet(); 3. Get
      * connection with TagListCache : RemoteCache tagListCache =
      * GetCache("TagListCache"); 4. Put SET object with username as key :
      * tagListCache.put("ljhiyh",tagList);
      *
-     * - Update TagListTree 1. After the job that put tag to tagListCache, get
+     * - Update TagListTree 1. After the job that put store to tagListCache, get
      * connection with TagListTreeCache : RemoteCache tagListTreeCache =
      * GetCache("TagListTreeCache"); 2. Get latest Tree and update then, put the
      * tree : tagListTree.put("tagListTree",TST object);
@@ -64,7 +64,7 @@ public class TestTag {
     TST<String> tagTree;
 
     @Autowired
-    TagCache tagCache;
+    ITagCache ITagCache;
 
     @Test
     public void testRemoteCacheConnection() throws Exception {
@@ -105,14 +105,14 @@ public class TestTag {
         addTagToTree(user3, tagTree);
         assertEquals(12, tagTree.size());
 
-        // Check user list for each tag
-        assertEquals(3, ((Set) tagCache.get("java")).size());
-        assertEquals(2, ((Set) tagCache.get("jboss")).size());
-        assertEquals(2, ((Set) tagCache.get("레드")).size());
+        // Check user list for each store
+        assertEquals(3, ((Set) ITagCache.get("java")).size());
+        assertEquals(2, ((Set) ITagCache.get("jboss")).size());
+        assertEquals(2, ((Set) ITagCache.get("레드")).size());
 
-        // Check user name for each tag
+        // Check user name for each store
         assertEquals("[jooho, ljhiyh]",
-                ((Set) tagCache.get("jboss")).toString());
+                ((Set) ITagCache.get("jboss")).toString());
 
     }
 
@@ -123,14 +123,14 @@ public class TestTag {
 
         for (String key : userVo.getPersonalTagList()) {
             tagTree.put(key, key);
-            userListforTag = (Set<String>) tagCache.get(key);
+            userListforTag = (Set<String>) ITagCache.get(key);
             if (userListforTag == null) {
                 userListforTag = new TreeSet<>();
             }
             // update this user to userList
             userListforTag.add(userVo.getName());
-            // update userList for the tag
-            tagCache.put(key, userListforTag);
+            // update userList for the store
+            ITagCache.put(key, userListforTag);
         }
 
     }

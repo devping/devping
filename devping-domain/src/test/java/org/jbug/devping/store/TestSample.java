@@ -1,4 +1,4 @@
-package org.jbug.devping.tag;
+package org.jbug.devping.store;
 
 import org.jbug.devping.configuration.DevPingCacheConfig;
 import org.junit.Ignore;

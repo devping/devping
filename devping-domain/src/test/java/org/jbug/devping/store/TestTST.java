@@ -1,4 +1,4 @@
-package org.jbug.devping.tag;
+package org.jbug.devping.store;
 
 import edu.princeton.cs.algs4.TST;
 import edu.princeton.cs.introcs.StdIn;

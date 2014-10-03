@@ -1,4 +1,4 @@
-package org.jbug.devping.tag;
+package org.jbug.devping.store;
 
 import org.junit.Test;
 
@@ -55,7 +55,7 @@ public class TestTagData {
 	private String getPersonTagData() {
 		/*
 		 * For individual, there are 5~20 tags. As for name, the length wil be 1
-		 * to 20. As for tag, the length will be 4 to 20. Test data include
+		 * to 20. As for store, the length will be 4 to 20. Test data include
 		 * 100000 people.
 		 */
 
@@ -89,7 +89,7 @@ public class TestTagData {
 			tagBuilder.append(alphabet[index]);
 		}
 		String tag = tagBuilder.toString();
-		// System.out.println(tag);
+		// System.out.println(store);
 		return tag;
 	}
 }

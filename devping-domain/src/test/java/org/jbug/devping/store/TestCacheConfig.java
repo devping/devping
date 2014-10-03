@@ -1,7 +1,7 @@
-package org.jbug.devping.tag;
+package org.jbug.devping.store;
 
 import edu.princeton.cs.algs4.TST;
-import org.jbug.devping.cache.TagCache;
+import org.jbug.devping.cache.ITagCache;
 import org.jbug.devping.configuration.DevPingCacheConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +20,7 @@ public class TestCacheConfig {
 	TST<String> tagTree;
 
     @Autowired
-    TagCache tagCache;
+    ITagCache ITagCache;
 
 	@Test
 	public void testTagTree() {
@@ -29,7 +29,7 @@ public class TestCacheConfig {
 
     @Test
     public void testCache() {
-        assertNotNull(tagCache);
+        assertNotNull(ITagCache);
     }
 
 }

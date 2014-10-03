@@ -1,6 +1,5 @@
-package org.jbug.devping.cache;
+package org.jbug.devping.cache.infinispan;
 
-import org.infinispan.client.hotrod.RemoteCache;
 import org.infinispan.client.hotrod.RemoteCacheManager;
 import org.infinispan.client.hotrod.configuration.Configuration;
 import org.infinispan.client.hotrod.configuration.ConfigurationBuilder;
@@ -12,25 +11,36 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.Set;
 
-public class InfinispanTagCacheImpl implements TagCache {
-    final static Logger logger = LoggerFactory.getLogger(InfinispanTagCacheImpl.class);
-    private String CONFIG_FILE = "hotrod-server.properties";
-    private RemoteCacheManager remoteCacheManager;
-	private RemoteCache<String, Set<String>> treeCache;
+/**
+ * Created by jhouse on 10/3/14.
+ */
+public abstract class AbstractInfinispanCache {
+    final static Logger logger = LoggerFactory.getLogger(AbstractInfinispanCache.class);
+    public boolean isInit = false;
+    protected String CONFIG_FILE = "hotrod-server.properties";
+    protected RemoteCacheManager remoteCacheManager;
+    protected String cacheName = null;
 
-    public InfinispanTagCacheImpl() {
+    public AbstractInfinispanCache() {
         String configFile = System.getProperty("infinispan.hotrod");
-        if(configFile != null)
+        if (configFile != null)
             CONFIG_FILE = configFile;
 
-        if(remoteCacheManager == null)
+        if (remoteCacheManager == null)
             init();
 
     }
 
-    private void init(){
+    public boolean isInitialized() {
+        return isInit;
+    }
+
+    public void setCacheName(String cacheName) {
+        this.cacheName = cacheName;
+    }
+
+    private void init() {
         Configuration configuration = null;
         ConfigurationBuilder builder = new ConfigurationBuilder();
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
@@ -52,8 +62,7 @@ public class InfinispanTagCacheImpl implements TagCache {
         configuration = builder.build();
         remoteCacheManager = new RemoteCacheManager(configuration);
         waitForConnectionReady();
-        treeCache = remoteCacheManager.getCache("TagCache");
-
+        isInit = true;
     }
 
     private void waitForConnectionReady() {
@@ -62,22 +71,6 @@ public class InfinispanTagCacheImpl implements TagCache {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-    }
-
-    @SuppressWarnings("unchecked")
-	@Override
-	public Set<String> get(String key) {
-		return (Set<String>) treeCache.get(key);
-	}
-
-	@Override
-	public void put(String key, Set<String> userListforTag) {
-		treeCache.put(key, userListforTag);
-	}
-
-    @Override
-    public <T> void remove(T key) {
-        treeCache.remove(key);
     }
 
 
