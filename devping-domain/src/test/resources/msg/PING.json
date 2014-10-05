@@ -1,0 +1,18 @@
+{
+    "func": "ping",
+    "userIdsWithTag": [
+        {
+            "userId": "jooho",
+            "nickName": "Client1"
+        },
+        {
+            "userId": "redhat",
+            "nickName": "Client2"
+        }
+    ],
+    "userId": "ljhiyh",
+    "nickName": "트레이닝맨",
+    "question": "MQTT 구현하자",
+    "channelId": "ljhiyh/chat/12345",
+    "time": "2014-10-04 13:55:29 +0100"
+}

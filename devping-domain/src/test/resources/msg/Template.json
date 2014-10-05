@@ -1,0 +1,10 @@
+{
+    "func" : "요청하는 목적(ping,pong,sendMsg)",
+    "enc"  : "암호화 되어 있는가?(default:false)",
+    "arrayData" : [
+        { "userId" : "jooho" , "nickName" : "Client1"},
+        { "userId" : "redhat" , "nickName" : "Client2" }
+    ],
+    "data" : "ljhiyh",
+    "time" : "2014-10-04 13:55:29 +0100"
+}

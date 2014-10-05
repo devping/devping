@@ -50,14 +50,20 @@
     </c:forEach>
 </c:if>
 
-<c:if test="${case eq 'findPeopleWithTag'}">
+<c:if test="${case eq 'findPeopleWithTagList'}">
     <h3>Find People With the Tag</h3>
-    <ul>Tag "${tag}" 을 가지고 있는 사람은 총 ${fn:length(peopleWithTag)} 명 입니다.</ul>
-    <c:forEach var="personWithTag" items="${peopleWithTag}">
+    <ul>Tag "${tagList}" 을 가지고 있는 사람은 총 ${fn:length(peopleWithTagList)} 명 입니다.</ul>
+    <c:forEach var="personWithTag" items="${peopleWithTagList}">
         <li>${personWithTag}</li>
     </c:forEach>
 </c:if>
-
+<c:if test="${case eq 'findPeopleWithTag'}">
+    <h3>Find People With the TagList</h3>
+    <ul>Tag "${tagList}" 을 가지고 있는 사람은 총 ${fn:length(selectedPeople)} 명 입니다.</ul>
+    <c:forEach var="selectedPerson" items="${selectedPeople}">
+        <li>${selectedPerson}</li>
+    </c:forEach>
+</c:if>
 
 </body>
 </html>

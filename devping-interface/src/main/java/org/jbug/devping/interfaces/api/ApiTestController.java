@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/v1")
 public class ApiTestController extends RestApiController {
-    @RequestMapping("/projectName")
+    @RequestMapping(value ="/projectName")
     @ResponseBody
     public Project projectName() {
         return new Project("devping");

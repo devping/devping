@@ -3,16 +3,14 @@ package org.jbug.devping.msg;
 import org.jbug.devping.store.MessageStore;
 import org.jbug.devping.utils.NumberUtil;
 import org.jbug.devping.vo.UserVo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by jhouse on 10/3/14.
  */
-@Component
+//@Component
 public class MessageBroker {
 
-    @Autowired
+//    @Autowired
     MessageStore messageStore;
 
     public String generateChannelId(UserVo userVo) {

@@ -6,12 +6,10 @@ import org.jbug.devping.interfaces.web.DevPingWebs;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.accept.ContentNegotiationManager;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
@@ -19,7 +17,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +24,7 @@ import java.util.List;
  * Created by nadal on 2014. 9. 15..
  */
 @Configuration
-@ComponentScan(basePackageClasses = {DevPingWebs.class, DevPingApis.class})
+@ComponentScan(basePackages = {"org.jbug.devping"},basePackageClasses = {DevPingWebs.class, DevPingApis.class})
 
 public class DevPingWebServletApplicationContextConfig extends AbstractDevPingWebMvcConfig {
     public static final String UPLOAD_DIR = "/devping/service/webroot/image/temp";

@@ -15,17 +15,17 @@ import java.util.*;
  */
 @Controller
 @RequestMapping(value = "/tag")
-public class TagTestController{
+public class TagTestController {
     @Autowired
     TagService tagService;
-    private HashMap<String,UserVo> TestUserVo = new HashMap<>();
+    private HashMap<String, UserVo> TestUserVo = new HashMap<>();
 
-    @RequestMapping(value = "/main",method = RequestMethod.GET)
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String tagMain() {
         return "/tagTest";
     }
 
-    @RequestMapping(value = "/loginUpdateTag",method = RequestMethod.POST)
+    @RequestMapping(value = "/loginUpdateTag", method = RequestMethod.POST)
     public ModelAndView loginUpdateTagTest(
             String id,
             String tagList
@@ -34,23 +34,23 @@ public class TagTestController{
         Set<String> personalTag = new HashSet<>();
 
         StringTokenizer stringTokenizer = new StringTokenizer(tagList);
-        while(stringTokenizer.hasMoreTokens()){
+        while (stringTokenizer.hasMoreTokens()) {
             personalTag.add(stringTokenizer.nextToken());
         }
 
         UserVo userVo = new UserVo();
         userVo.setName(id);
         userVo.setPersonalTagList(personalTag);
-        TestUserVo.put(id,userVo);
+        TestUserVo.put(id, userVo);
         tagService.LoginUpdateTagService(userVo);
 
         //결과값 확인( prefix )
-        TreeSet<String> tagListWithJ= tagService.findTagWithPrefix("j");
-        TreeSet<String> tagListWithW= tagService.findTagWithPrefix("w");
-        TreeSet<String> tagListWithKorean= tagService.findTagWithPrefix("웹");
+        TreeSet<String> tagListWithJ = tagService.findTagWithPrefix("j");
+        TreeSet<String> tagListWithW = tagService.findTagWithPrefix("w");
+        TreeSet<String> tagListWithKorean = tagService.findTagWithPrefix("웹");
 
         //자바 테그를 가진 사람들
-        TreeSet<String> peopleWithTag= tagService.findPeopleWithTag("java");
+        TreeSet<String> peopleWithTag = tagService.findPeopleWithTag("java");
 
 
         ModelAndView model = new ModelAndView("tagTestResult");
@@ -58,24 +58,24 @@ public class TagTestController{
         model.addObject("tagListWithW", tagListWithW);
         model.addObject("tagListWithKorean", tagListWithKorean);
         model.addObject("peopleWithTag", peopleWithTag);
-        model.addObject("case","loginUpdateTag");
+        model.addObject("case", "loginUpdateTag");
         return model;
     }
 
 
-    @RequestMapping(value = "/logoutUpdateTag",method = RequestMethod.POST)
-    public ModelAndView logoutUpdateTagTest(String id){
-        UserVo userVo =TestUserVo.get(id);
+    @RequestMapping(value = "/logoutUpdateTag", method = RequestMethod.POST)
+    public ModelAndView logoutUpdateTagTest(String id) {
+        UserVo userVo = TestUserVo.get(id);
 
         tagService.LogoutUpdateTagService(userVo);
 
         //결과값 확인( prefix )
-        TreeSet<String> tagListWithJ= tagService.findTagWithPrefix("j");
-        TreeSet<String> tagListWithW= tagService.findTagWithPrefix("w");
-        TreeSet<String> tagListWithKorean= tagService.findTagWithPrefix("웹");
+        TreeSet<String> tagListWithJ = tagService.findTagWithPrefix("j");
+        TreeSet<String> tagListWithW = tagService.findTagWithPrefix("w");
+        TreeSet<String> tagListWithKorean = tagService.findTagWithPrefix("웹");
 
         //자바 테그를 가진 사람들
-        TreeSet<String> peopleWithTag= tagService.findPeopleWithTag("java");
+        TreeSet<String> peopleWithTag = tagService.findPeopleWithTag("java");
 
 
         ModelAndView model = new ModelAndView("tagTestResult");
@@ -83,33 +83,95 @@ public class TagTestController{
         model.addObject("tagListWithW", tagListWithW);
         model.addObject("tagListWithKorean", tagListWithKorean);
         model.addObject("peopleWithTag", peopleWithTag);
-        model.addObject("case","logoutUpdateTag");
+        model.addObject("case", "logoutUpdateTag");
 
         return model;
     }
 
-    @RequestMapping(value = "/searchTagWithPrefix",method = RequestMethod.POST)
-    public ModelAndView searchTagWithPrefixTest(String prefix){
+    @RequestMapping(value = "/searchTagWithPrefix", method = RequestMethod.POST)
+    public ModelAndView searchTagWithPrefixTest(String prefix) {
         //결과값 확인( prefix )
-        TreeSet<String> tagListWithPrefix= tagService.findTagWithPrefix(prefix);
+        TreeSet<String> tagListWithPrefix = tagService.findTagWithPrefix(prefix);
         ModelAndView model = new ModelAndView("tagTestResult");
         model.addObject("tagListWithPrefix", tagListWithPrefix);
-        model.addObject("prefix",prefix);
-        model.addObject("case","searchTagWithPrefix");
+        model.addObject("prefix", prefix);
+        model.addObject("case", "searchTagWithPrefix");
 
         return model;
     }
 
-    @RequestMapping(value = "/findPeopleWithTag",method = RequestMethod.POST)
-    public ModelAndView findPeopleWithTagTest(String tag){
+    @RequestMapping(value = "/findPeopleWithTagList", method = RequestMethod.POST)
+    public ModelAndView findPeopleWithTagListTest(String tagList) {
+
+        TreeSet<String> peopleWithTag = null;
+        TreeSet<String> selectedPeople = null;
+        StringTokenizer stringTokenizer = new StringTokenizer(tagList);
+        while (stringTokenizer.hasMoreTokens()) {
+            peopleWithTag = tagService.findPeopleWithTag(stringTokenizer.nextToken());
+            selectedPeople = combine(selectedPeople, peopleWithTag);
+        }
+
         //결과값 확인( store )
-        TreeSet<String> peopleWithTag= tagService.findPeopleWithTag(tag);
         ModelAndView model = new ModelAndView("tagTestResult");
-            model.addObject("peopleWithTag", peopleWithTag);
-        model.addObject("tag",tag);
-        model.addObject("case","findPeopleWithTag");
+        model.addObject("peopleWithTagList", selectedPeople);
+        model.addObject("tagList", tagList);
+        model.addObject("case", "findPeopleWithTagList");
 
         return model;
+    }
+
+
+    @RequestMapping(value = "/pingRequest", method = RequestMethod.POST)
+    public ModelAndView pingRequestTest( String userId) {
+
+        System.out.println(userId);
+
+
+
+
+
+
+
+//        TreeSet<String> peopleWithTag = null;
+//        TreeSet<String> selectedPeople = null;
+//        StringTokenizer stringTokenizer = new StringTokenizer(tagList);
+//        while (stringTokenizer.hasMoreTokens()) {
+//            peopleWithTag = tagService.findPeopleWithTag(stringTokenizer.nextToken());
+//            combine(selectedPeople, peopleWithTag);
+//        }
+//
+//        //결과값 확인( store )
+//
+        ModelAndView model = new ModelAndView("tagTestResult");
+//        model.addObject("selectedPeople", selectedPeople);
+//        model.addObject("tagList", tagList);
+//        model.addObject("case", "PingRequest");
+
+        return model;
+    }
+
+    private TreeSet combine(TreeSet<String> selectedPeople, TreeSet<String> peopleWithTag) {
+        TreeSet<String> newSelectedPeople = new TreeSet<>();
+        if (selectedPeople == null)
+            selectedPeople = peopleWithTag;
+        else {
+            if (selectedPeople.size() <= peopleWithTag.size()) {
+                for (String selectedPrivousPerson : selectedPeople) {
+                    if(peopleWithTag.contains(selectedPrivousPerson)){
+                        newSelectedPeople.add(selectedPrivousPerson);
+                    }
+                }
+            }else{
+                for (String selectedPersonByTag : peopleWithTag) {
+                    if(selectedPeople.contains(selectedPersonByTag)){
+                        newSelectedPeople.add(selectedPersonByTag);
+                    }
+                }
+            }
+            selectedPeople = newSelectedPeople;
+
+        }
+        return selectedPeople;
     }
 
 }

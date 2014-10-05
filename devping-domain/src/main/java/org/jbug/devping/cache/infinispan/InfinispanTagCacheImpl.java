@@ -12,8 +12,7 @@ public class InfinispanTagCacheImpl extends AbstractInfinispanCache implements I
 	private RemoteCache<String, Set<String>> tagCache;
 
     public InfinispanTagCacheImpl() {
-        setCacheName("TagCache");
-        tagCache = remoteCacheManager.getCache(cacheName);
+        tagCache = remoteCacheManager.getCache("TagCache");
     }
     @SuppressWarnings("unchecked")
 	@Override
