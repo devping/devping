@@ -1,18 +1,45 @@
 devPingApp.service('pingPongService', function($http){
-	this.ping = function(room, $scope){
+	this.selectTags = function(objTags, $scope) {
 		$http({
-			url: urlBase+'ping.do',
+			url: urlBase+'/test/traceTagName.ajax',
 			method: "POST",
-			data: JSON.stringify( room ),
+			data: objTags,
+			headers: {'Content-Type': 'application/json'}
+		}).success(function(result){
+			console.log(result);
+			$scope.tagList = result.tagList;
+		}).error(function (error) {
+			console.log(error);
+		});
+	};
+	this.searchUser = function(objTags, $scope) {
+		$http({
+			url: urlBase+'/test/searchUser.ajax',
+			method: "POST",
+			data: objTags,
+			headers: {'Content-Type': 'application/json'}
+		}).success(function(result){
+			console.log(result);
+			$scope.userIdsWithTag = result.userIdsWithTag;
+			$scope.totalMembers = result.totalMembers;
+		}).error(function (error) {
+			console.log(error);
+		});
+	};
+	this.ping = function(objPing, $scope){
+		$http({
+			url: urlBase+'/test/ping.ajax',
+			method: "POST",
+			data: objPing,
 			headers: {'Content-Type': 'application/json'}
 		}).success(function(result){
 			//create room
-			$scope.roomId = result;
-			$scope.chatList[result] = [];
-			$scope.userList[result] = [];
+			$scope.roomId = result.channelId;
+			$scope.chatList[result.channelId] = [];
+			$scope.userList[result.channelId] = [];
 			//make room
-			room.roomId = result;
-			$scope.myRoomList.push(room);
+//			room.roomId = result.channelId;
+//			$scope.myRoomList.push(room);
 			//log
 			console.log($scope.myRoomList);
 			console.log($scope.roomId);
