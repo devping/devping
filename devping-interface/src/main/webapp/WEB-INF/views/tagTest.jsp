@@ -18,10 +18,9 @@
     function ajaxTest() {
         jQuery.ajax({
             type:"POST",
-            url:"../cs/pingRequest",
-//            url:"../v1/projectName",
-            data : JSON.stringify(pingData),
-//            dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
+            url:"../cs/tagPrefix",
+            data : JSON.stringify(tagPrefixData),
+            dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
             success : function(data) {
                 // 통신이 성공적으로 이루어졌을 때 이 함수를 타게 된다.
                 // TODO
@@ -78,6 +77,10 @@
                 "channelId" : "ljhiyh/chat/12345",
                 "time" : "2014-10-04 13:55:29 +0100"
             };
+
+var tagPrefixData =    {
+            "prefix" : "ja"
+    };
 
 </script>
 <body>

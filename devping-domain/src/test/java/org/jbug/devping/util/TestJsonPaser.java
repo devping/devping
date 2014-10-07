@@ -16,7 +16,7 @@ import java.util.Iterator;
  * Created by jhouse on 10/3/14.
  */
 public class TestJsonPaser {
-    final String TEST_DATA_FILE = "/Users/jhouse/dev/git/devping/devping-domain/src/test/resources/msg/PING_REQEUST.json";
+    final String TEST_DATA_FILE = "/Users/jhouse/dev/git/devping/devping-domain/src/test/resources/msg/PING_SERVER_REQEUST.json";
 
     @Test
     public void testPaser() throws Exception {

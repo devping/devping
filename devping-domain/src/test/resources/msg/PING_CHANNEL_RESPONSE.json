@@ -1,6 +1,6 @@
 {
-    "func": "pong",
-    "pongUser": [
+    "func": "pingChannelResponse",
+    "joinUser": [
         {
             "userId": "jooho"
         },
@@ -9,5 +9,5 @@
         }
     ],
     "channelId": "ljhiyh/chat/12345",
-    "accept": true
+    "date": "2014-10-04 13:55:29 +0100"
 }

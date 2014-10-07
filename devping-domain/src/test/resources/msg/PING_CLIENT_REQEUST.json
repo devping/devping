@@ -1,6 +1,5 @@
 {
-    "func": "pong",
-
+    "func": "pingToClient",
     "pingUser": [
         {"userId": "ljhiyh"},
         {"nickName": "트레이닝맨"}

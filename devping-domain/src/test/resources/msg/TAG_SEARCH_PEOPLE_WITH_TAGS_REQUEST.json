@@ -1,7 +1,6 @@
 {
     "func": "tag_people_with_tags",
-    "tags" : [
-        { "tag":"java"},
-        { "tag":"jboss"}
+    "tagList" : [
+        "java","jboss"
     ]
 }
