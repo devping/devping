@@ -20,7 +20,7 @@
             type:"POST",
             url:"../cs/pingRequest",
 //            url:"../v1/projectName",
-            data : pingData,
+            data : JSON.stringify(pingData),
 //            dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
             success : function(data) {
                 // 통신이 성공적으로 이루어졌을 때 이 함수를 타게 된다.
@@ -70,7 +70,7 @@
     var pingData= {
                 "userIdsWithTag" : [
                     { "userId" : "jooho" , "nickName" : "Client1"},
-                    { "userId" : "redhat" , "nickName" : "Client2" }
+                    { "userId" : "redhat" , "nickName" : "Client2"}
                 ],
                 "userId" : "ljhiyh",
                 "nickName" : "트레이닝맨",

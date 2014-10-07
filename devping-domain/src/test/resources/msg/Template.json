@@ -5,6 +5,6 @@
         { "userId" : "jooho" , "nickName" : "Client1"},
         { "userId" : "redhat" , "nickName" : "Client2" }
     ],
-    "data" : "ljhiyh",
-    "time" : "2014-10-04 13:55:29 +0100"
+    "userId" : "ljhiyh",
+    "date" : "2014-10-04 13:55:29 +0100"
 }

@@ -1,0 +1,8 @@
+{
+    "func": "tag_prefix",
+    "prefix" : "ja",
+    "tags" : [
+        {"tag" : "java"},
+        {"tag" : "jboss"}
+    ]
+}

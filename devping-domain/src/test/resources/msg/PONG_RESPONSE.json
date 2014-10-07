@@ -1,0 +1,13 @@
+{
+    "func": "pong",
+    "pongUser": [
+        {
+            "userId": "jooho"
+        },
+        {
+            "nickName": "Client1"
+        }
+    ],
+    "channelId": "ljhiyh/chat/12345",
+    "accept": true
+}

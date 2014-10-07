@@ -1,0 +1,10 @@
+{
+    "func": "receiveMsg",
+
+    "userId": "ljhiyh",
+    "channelId": "ljhiyh/chat/12345",
+    "msgList":[
+        [{"Sender" :"ljhiyh"}, {"1": "Sender test 1"}],
+        [{"Sender" :"ljhiyh"}, {"2": "Sender test 2"}]
+    ]
+}

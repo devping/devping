@@ -1,0 +1,16 @@
+{
+    "func": "pong",
+
+    "pingUser": [
+        {"userId": "ljhiyh"},
+        {"nickName": "트레이닝맨"}
+    ],
+
+    "pongUser":[
+        {"userId": "jooho"},
+        {"nickName": "Client1"}
+    ],
+    "question": "MQTT 구현하자",
+    "channelId": "ljhiyh/chat/12345",
+    "date": "2014-10-04 13:55:29 +0100"
+}
