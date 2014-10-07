@@ -25,7 +25,39 @@ devPingApp.controller('PingPongController', function($scope, $interval, pingPong
 		$scope.chatInputChecked = false;
 	};
 	
-	$scope.ping = function($event) {
+	$scope.traceTagName = function() {
+		var tagStr = $scope.pingTags;
+		var tagArray = tagStr.split(',');
+		var objTags = {
+				func: "tag_prefix",
+				prefix: tagArray[tagArray.length-1].replace(/(^\s*)|(\s*$)/g, "")
+		};
+		pingPongService.selectTags(objTags, $scope);
+	};
+	
+	$scope.searchUser = function() {
+		var tagStr = $scope.pingTags;
+		var tagArray = tagStr.split(',');
+		for(var i=0, j=tagArray.length; i<j; i++){
+			tagArray[i] = tagArray[i].replace(/(^\s*)|(\s*$)/g, "");
+		}
+		var objTags = {
+				func: "tag_people_with_tags",
+				tagList: tagArray
+		};
+		pingPongService.searchUser(objTags, $scope);
+	};
+	
+	$scope.ping = function() {
+		var objPing = {
+				func: "ping_to_server",
+				userIdsWithTag: $scope.userIdsWithTag,
+				userId: '',
+				nickName: '',
+				question: $scope.pingQuestion
+		};
+		pingPongService.ping(objPing, $scope);
+		
 		//set room timeout
 		$scope.pingCountdown = 30;
 		//set room info
@@ -36,7 +68,7 @@ devPingApp.controller('PingPongController', function($scope, $interval, pingPong
 			tagList: $scope.pingTags,
 			question: $scope.pingQuestion
 		};
-		pingPongService.ping(room, $scope);
+//		pingPongService.ping(room, $scope);
 		
 		//visible input box
 		$scope.chatInputChecked = true;
