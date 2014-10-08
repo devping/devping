@@ -36,6 +36,7 @@ public class CsTestController {
 	
 	@RequestMapping(value = "/searchUser.ajax", method = RequestMethod.POST)
 	public @ResponseBody AdeptsSuggectionVo searchAdepts(@RequestBody AdeptsSuggectionVo data) {
+		logger.info(data.toString());
 		
 		logger.info("provide expert list.");
 		data.setUserIdsWithTag(null);
@@ -47,6 +48,7 @@ public class CsTestController {
 	
 	@RequestMapping(value = "/ping.ajax", method = RequestMethod.POST)
 	public @ResponseBody PingToServerResponseVo ping(@RequestBody PingToServerRequsetVo data) {
+		logger.info(data.toString());
 		
 		logger.info("send message by WebSocket.");
 		logger.info("make channel ID.");

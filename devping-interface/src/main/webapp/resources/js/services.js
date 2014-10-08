@@ -41,8 +41,7 @@ devPingApp.service('pingPongService', function($http){
 //			room.roomId = result.channelId;
 //			$scope.myRoomList.push(room);
 			//log
-			console.log($scope.myRoomList);
-			console.log($scope.roomId);
+			console.log(result);
 		}).error(function (error) {
 			console.log(error);
 		});

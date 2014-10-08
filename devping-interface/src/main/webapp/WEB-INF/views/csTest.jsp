@@ -54,10 +54,16 @@
 			<div>
 				<label>question</label>
 			</div>
-			<textarea rows="2"
+			<textarea rows="3"
 				data-ng-model="pingQuestion"></textarea>
 			<button type="button" class="btn btn-primary"
 					data-ng-click="ping()">Ping</button>
+			<div>
+				<label>channelID</label>
+			</div>
+			<div>
+				{{ roomId }}
+			</div>
 		</section>
 	</section>
 
