@@ -127,13 +127,13 @@
 						<div class="row">
 							<div class="col-lg-3">
 								<ul class="jb-c-content-list">
-									<li data-ng-repeat="userIdsWithTag in userIdsWithTag">
+									<li data-ng-repeat="user in userIdsWithTag">
 										<div class="input-group">
 											<span class="input-group-addon">
 												<input type="checkbox">
 											</span>
 											<div class="form-control">
-												{{ userIdsWithTag.nickName }}
+												{{ user.nickName }}
 											</div>
 										</div>
 									</li>

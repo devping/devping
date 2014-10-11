@@ -13,22 +13,17 @@ devPingApp.controller('PingPongController', function($scope, $interval, pingPong
 		$scope.myRoomList = [];
 		$scope.chatList = {};
 		$scope.userList = {};
-		$scope.pingCountdown = {};
 		$scope.channelId;
 		$scope.pongCount = 0;
-		
 		$scope.chatInputChecked = false;
 	};
 	
 	$scope.traceTagName = function() {
-		var tagStr = $scope.pingTags;
-		var tagArray = tagStr.split(',');
-		var objTags = {
-				func: "tag_prefix",
-				prefix: tagArray[tagArray.length-1].replace(/(^\s*)|(\s*$)/g, "")
-		};
-		var promise = pingPongService.selectTags(objTags);
-		promise.then(
+		var tagArray = $scope.pingTags.split(',');
+		pingPongService.selectTags({
+			func: "tag_prefix",
+			prefix: tagArray[tagArray.length-1].replace(/(^\s*)|(\s*$)/g, "")
+		}).then(
 			function(payload) {
 				$scope.tagList = payload.tagList;
 			},
@@ -38,17 +33,14 @@ devPingApp.controller('PingPongController', function($scope, $interval, pingPong
 	};
 	
 	$scope.searchUser = function() {
-		var tagStr = $scope.pingTags;
-		var tagArray = tagStr.split(',');
+		var tagArray = $scope.pingTags.split(',');
 		for(var i=0, j=tagArray.length; i<j; i++){
 			tagArray[i] = tagArray[i].replace(/(^\s*)|(\s*$)/g, "");
 		}
-		var objTags = {
-				func: "tag_people_with_tags",
-				tagList: tagArray
-		};
-		var promise = pingPongService.searchUser(objTags);
-		promise.then(
+		pingPongService.searchUser({
+			func: "tag_people_with_tags",
+			tagList: tagArray
+		}).then(
 			function(payload) {
 				$scope.userIdsWithTag = payload.userIdsWithTag;
 				$scope.totalMembers = payload.totalMembers;
@@ -60,20 +52,18 @@ devPingApp.controller('PingPongController', function($scope, $interval, pingPong
 	
 	$scope.ping = function() {
 //set user info
-		var objPing = {
-				func: "ping_to_server",
-				userIdsWithTag: $scope.userIdsWithTag,
-				userId: '',
-				nickName: '',
-				question: $scope.pingQuestion
-		};
-		var promise = pingPongService.ping(objPing);
-		promise.then(
+		pingPongService.ping({
+			func: "ping_to_server",
+			userIdsWithTag: $scope.userIdsWithTag,
+			userId: '',
+			nickName: '',
+			question: $scope.pingQuestion
+		}).then(
 			function(payload) {
 				//create room
 				$scope.channelId = payload.channelId;
 				$scope.chatList[payload.channelId] = [];
-				$scope.userList[payload.channelId] = [];
+				$scope.userList[payload.channelId] = $scope.userIdsWithTag;
 				var dt = new Date();
 				var room = {
 					channelId: payload.channelId,
@@ -85,6 +75,8 @@ devPingApp.controller('PingPongController', function($scope, $interval, pingPong
 				$interval(function(){
 					room.pingCountdown--;
 //if someone connect this room, stop countdown.
+					if(room.pingCountdown == 0)
+						removeDevpinRoom(room.channelId);
 				}, 1000, 30);
 				//make room
 				$scope.myRoomList.push(room);
@@ -97,7 +89,7 @@ devPingApp.controller('PingPongController', function($scope, $interval, pingPong
 	};
 	
 	$scope.changeRoom = function(channelId){
-		$scope.channelId = channelId;
+		changeDevpingRoom(channelId);
 	};
 	
 	$scope.sendMessage = function(){
@@ -118,5 +110,21 @@ devPingApp.controller('PingPongController', function($scope, $interval, pingPong
 	
 	$scope.pong = function(){
 		pingPongService.pong($scope.user.id);
+	};
+	
+	function changeDevpingRoom(channelId){
+		$scope.channelId = channelId;
+	};
+	
+	function removeDevpinRoom(channelId){
+		for(var i=0,j=$scope.myRoomList.length;i<j;i++){
+			var room =  $scope.myRoomList[i];
+			if(room.channelId == channelId)
+				$scope.myRoomList.splice(i, 1);
+		}
+		delete $scope.chatList[channelId];
+		delete $scope.userList[channelId];
+		if($scope.channelId == channelId)
+			$scope.channelId = '';
 	};
 });
