@@ -1,5 +1,7 @@
 package org.jbug.devping.interfaces.web;
 
+import java.util.Random;
+
 import org.jbug.devping.vo.AdeptsSuggectionVo;
 import org.jbug.devping.vo.PingToServerRequsetVo;
 import org.jbug.devping.vo.PingToServerResponseVo;
@@ -53,7 +55,8 @@ public class CsTestController {
 		logger.info("send message by WebSocket.");
 		logger.info("make channel ID.");
 		PingToServerResponseVo answer = new PingToServerResponseVo();
-		answer.setChannelId("1234");
+		Random r = new Random();
+		answer.setChannelId(String.valueOf(r.nextInt(100)));
 		answer.setDate("2014-10-08 23:15:08");
 		answer.setResult("success");
 		answer.setFunc("pingToServer");

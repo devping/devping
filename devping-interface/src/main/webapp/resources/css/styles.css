@@ -234,3 +234,5 @@ a, a:hover, a:focus {
 .jb-c-chat-available-user li {
 	margin-bottom: 15px;
 }
+.jb-c-tag-input { margin-bottom: 10px; }
+.jb-c-content-list { padding-left: 0; }
