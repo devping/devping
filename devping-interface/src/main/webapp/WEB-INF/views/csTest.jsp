@@ -7,8 +7,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>DevPing</title>
-	<link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet" media="screen"/>
-	<link href='http://fonts.googleapis.com/css?family=Fredericka+the+Great|Chelsea+Market|Enriqueta' rel='stylesheet' type='text/css'>
+   <!-- <link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet" media="screen"/>
+	<link href='http://fonts.googleapis.com/css?family=Fredericka+the+Great|Chelsea+Market|Enriqueta' rel='stylesheet' type='text/css'> -->
 	<link href="<c:url value="/resources/css/styles.css"/>" rel="stylesheet" />
 	<!--[if lt IE 9]>
 	<script src="/resources/lib/respond.min.js"></script>
@@ -46,7 +46,7 @@
 							<input type="checkbox">
 						</span>
 						<div>
-							{{ userIdsWithTag.userId }} - {{ userIdsWithTag.nickName }}
+							{{ userIdsWithTag }}
 						</div>
 					</div>
 				</li>

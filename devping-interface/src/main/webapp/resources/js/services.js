@@ -1,7 +1,7 @@
 devPingApp.service('pingPongService', function($http){
 	this.selectTags = function(objTags, $scope) {
 		$http({
-			url: urlBase+'/test/traceTagName.ajax',
+			url: urlBase+'cs/traceTagName.ajax',
 			method: "POST",
 			data: objTags,
 			headers: {'Content-Type': 'application/json'}
@@ -14,7 +14,7 @@ devPingApp.service('pingPongService', function($http){
 	};
 	this.searchUser = function(objTags, $scope) {
 		$http({
-			url: urlBase+'/test/searchUser.ajax',
+			url: urlBase+'cs/searchUser.ajax',
 			method: "POST",
 			data: objTags,
 			headers: {'Content-Type': 'application/json'}
@@ -28,7 +28,7 @@ devPingApp.service('pingPongService', function($http){
 	};
 	this.ping = function(objPing, $scope){
 		$http({
-			url: urlBase+'/test/ping.ajax',
+			url: urlBase+'cs/ping.ajax',
 			method: "POST",
 			data: objPing,
 			headers: {'Content-Type': 'application/json'}

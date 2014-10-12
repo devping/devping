@@ -1,6 +1,7 @@
 package org.jbug.devping.interfaces.web;
 
 import org.jbug.devping.service.TagService;
+import org.jbug.devping.utils.StringUtil;
 import org.jbug.devping.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 /**
@@ -18,11 +20,34 @@ import java.util.*;
 public class TagTestController {
     @Autowired
     TagService tagService;
+
+    @Autowired
+    HttpSession httpSession;
     private HashMap<String, UserVo> TestUserVo = new HashMap<>();
 
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String tagMain() {
         return "/tagTest";
+    }
+
+    @RequestMapping(value = "/echo", method = RequestMethod.GET)
+    public String tagEcho() {
+        return "/echo";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String login() {
+        UserVo userVo = new UserVo();
+        userVo.setName("Jooho Lee");
+        userVo.setUserId("ljhiyh");
+        userVo.setNickName("Jhouse");
+        HashSet<String> tagList = new HashSet<>();
+        tagList.add("java");
+        tagList.add("jboss");
+        userVo.setPersonalTagList(tagList);
+        httpSession.setAttribute("userVo",userVo);
+
+        return "/echo";
     }
 
     @RequestMapping(value = "/loginUpdateTag", method = RequestMethod.POST)
@@ -50,7 +75,9 @@ public class TagTestController {
         TreeSet<String> tagListWithKorean = tagService.findTagWithPrefix("웹");
 
         //자바 테그를 가진 사람들
-        TreeSet<String> peopleWithTag = tagService.findPeopleWithTag("java");
+        List<String> javaTag = new ArrayList<>();
+        javaTag.add("java");
+        TreeSet<String> peopleWithTag = tagService.findPeopleWithTagList(javaTag);
 
 
         ModelAndView model = new ModelAndView("tagTestResult");
@@ -75,7 +102,9 @@ public class TagTestController {
         TreeSet<String> tagListWithKorean = tagService.findTagWithPrefix("웹");
 
         //자바 테그를 가진 사람들
-        TreeSet<String> peopleWithTag = tagService.findPeopleWithTag("java");
+        List<String> javaTag = new ArrayList<>();
+        javaTag.add("java");
+        TreeSet<String> peopleWithTag = tagService.findPeopleWithTagList(javaTag);
 
 
         ModelAndView model = new ModelAndView("tagTestResult");
@@ -105,11 +134,8 @@ public class TagTestController {
 
         TreeSet<String> peopleWithTag = null;
         TreeSet<String> selectedPeople = null;
-        StringTokenizer stringTokenizer = new StringTokenizer(tagList);
-        while (stringTokenizer.hasMoreTokens()) {
-            peopleWithTag = tagService.findPeopleWithTag(stringTokenizer.nextToken());
-            selectedPeople = combine(selectedPeople, peopleWithTag);
-        }
+        List<String> tagListCollection = StringUtil.arrayToList(tagList);
+        peopleWithTag = tagService.findPeopleWithTagList(tagListCollection);
 
         //결과값 확인( store )
         ModelAndView model = new ModelAndView("tagTestResult");

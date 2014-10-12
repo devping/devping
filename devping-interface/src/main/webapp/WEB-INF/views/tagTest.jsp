@@ -11,78 +11,7 @@
 <head>
     <title>Tag Test Page</title>
 </head>
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 
-<script>
-
-    function ajaxTest() {
-        jQuery.ajax({
-            type:"POST",
-            url:"../cs/tagPrefix",
-            data : JSON.stringify(tagPrefixData),
-            dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
-            success : function(data) {
-                // 통신이 성공적으로 이루어졌을 때 이 함수를 타게 된다.
-                // TODO
-                alert("success")
-            },
-            complete : function(data) {
-                // 통신이 실패했어도 완료가 되었을 때 이 함수를 타게 된다.
-                // TODO
-                alert("Complete")
-            },
-            error : function(xhr, status, error) {
-                alert("에러발생");
-            }
-        });
-    }
-//    function createJSON() {
-//        jsonObj = [];
-//
-//        userIdsWithTag=[];
-//
-//        user1 = {};
-//        user1["userId"] = "jooho";
-//        user1["nickName"] = "Client1";
-//
-//        user2 = {};
-//        user2["userId"] = "redhat";
-//        user2["nickName"] = "Client2";
-//
-//        userIdsWithTag.push(user1);
-//        userIdsWithTag.push(user2);
-//
-//        jsonObj.push(userIdsWithTag);
-//
-//        jsonObj.put("userId",$("#PingRequestId").val());
-//        jsonObj.put("nickName","트레이닝맨");
-//        jsonObj.put("question" , "MQTT 구현하자");
-//        jsonObj.put("channelId","ljhiyh/chat/12345");
-//        jsonObj.put( "time" , "2014-10-04 13:55:29 +0100");
-//
-//        jsonString = JSON.stringify(jsonObj);
-//
-//
-//        console.log(jsonString);
-//    }
-
-    var pingData= {
-                "userIdsWithTag" : [
-                    { "userId" : "jooho" , "nickName" : "Client1"},
-                    { "userId" : "redhat" , "nickName" : "Client2"}
-                ],
-                "userId" : "ljhiyh",
-                "nickName" : "트레이닝맨",
-                "question" : "MQTT 구현하자",
-                "channelId" : "ljhiyh/chat/12345",
-                "time" : "2014-10-04 13:55:29 +0100"
-            };
-
-var tagPrefixData =    {
-            "prefix" : "ja"
-    };
-
-</script>
 <body>
 <h1>Tag Test Page</h1>
 
@@ -153,16 +82,5 @@ var tagPrefixData =    {
     </table>
 </form>
 
-<h3>Ping 요청</h3>
-PingRequester : ljhiyh<br/>
-Ping을 받을 사람 : jooho, redhat <br/>
-
-    <table>
-        <tr>
-            <td colspan="2">
-                <input type="button" value="Ping" onclick="javascript:ajaxTest();"/>
-            </td>
-        </tr>
-    </table>
 </body>
 </html>

@@ -52,8 +52,8 @@ devPingApp.controller('PingPongController', function($scope, $interval, pingPong
 		var objPing = {
 				func: "ping_to_server",
 				userIdsWithTag: $scope.userIdsWithTag,
-				userId: '',
-				nickName: '',
+				userId: 'ljhiyh',
+				nickName: 'ljhiyh',
 				question: $scope.pingQuestion
 		};
 		pingPongService.ping(objPing, $scope);
