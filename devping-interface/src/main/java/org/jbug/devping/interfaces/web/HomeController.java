@@ -27,32 +27,37 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-@RequestMapping(value = "/main", method = RequestMethod.POST)
+@RequestMapping(value = "/main")
 	public String home(Locale locale, Model model, HttpServletRequest request) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		if( request.getParameter("type").equals("login") ){
-			//check login info
-			System.out.println(request.getParameter("identification") );
-			System.out.println(request.getParameter("password") );
-			//set ID
-			model.addAttribute( "myId", request.getParameter("identification") );
-			//success
-			return "home";
+		try{
+			if( request.getParameter("type").equals("login") ){
+				//check login info
+				System.out.println(request.getParameter("identification") );
+				System.out.println(request.getParameter("password") );
+				//set ID
+				model.addAttribute( "myId", request.getParameter("identification") );
+				//success
+				return "home";
+				//fail
+				//return "login";
+			} else if( request.getParameter("type").equals("regist") ){
+				//regist new member
+				System.out.println( request.getParameter("id") );
+				System.out.println( request.getParameter("email") );
+				System.out.println( request.getParameter("pw") );
+				System.out.println( request.getParameter("tags") );
+				//set ID
+				model.addAttribute( "myId", request.getParameter("id") );
+				//success
+				return "home";
+				//fail
+				//return "login";
+			}
+		}catch(NullPointerException e){
 			//fail
-			//return "login";
-		} else if( request.getParameter("type").equals("regist") ){
-			//regist new member
-			System.out.println( request.getParameter("id") );
-			System.out.println( request.getParameter("email") );
-			System.out.println( request.getParameter("pw") );
-			System.out.println( request.getParameter("tags") );
-			//set ID
-			model.addAttribute( "myId", request.getParameter("id") );
-			//success
-			return "home";
-			//fail
-			//return "login";
+			return "login";
 		}
 		//fail
 		return "login";

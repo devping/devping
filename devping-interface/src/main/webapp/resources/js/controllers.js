@@ -1,12 +1,7 @@
-//mainApp.controller('NavbarController', function ($scope, $location) {
-//	$scope.getClass = function (path) {
-//		if ($location.path().substr(0, path.length) == path) {
-//			return true
-//		} else {
-//			return false;
-//		}
-//	}
-//});
+//devPingApp.controller('customerList', ['MyService', function(MyService){
+//	$scope.customers = MyService.getCustomers();
+//}]);
+
 devPingApp.controller('PingPongController', function($scope, $interval, pingPongService){
 	init();
 	function init(){
@@ -18,68 +13,83 @@ devPingApp.controller('PingPongController', function($scope, $interval, pingPong
 		$scope.myRoomList = [];
 		$scope.chatList = {};
 		$scope.userList = {};
-		$scope.roomId;
-		$scope.pingCountdown = 0;
+		$scope.channelId;
 		$scope.pongCount = 0;
-		
 		$scope.chatInputChecked = false;
 	};
 	
 	$scope.traceTagName = function() {
-		var tagStr = $scope.pingTags;
-		var tagArray = tagStr.split(',');
-		var objTags = {
-				func: "tag_prefix",
-				prefix: tagArray[tagArray.length-1].replace(/(^\s*)|(\s*$)/g, "")
-		};
-		pingPongService.selectTags(objTags, $scope);
+		var tagArray = $scope.pingTags.split(',');
+		pingPongService.selectTags({
+			func: "tag_prefix",
+			prefix: tagArray[tagArray.length-1].replace(/(^\s*)|(\s*$)/g, "")
+		}).then(
+			function(payload) {
+				$scope.tagList = payload.tagList;
+			},
+			function(errorPayload) {
+				console.log(errorPayload);
+			});
 	};
 	
 	$scope.searchUser = function() {
-		var tagStr = $scope.pingTags;
-		var tagArray = tagStr.split(',');
+		var tagArray = $scope.pingTags.split(',');
 		for(var i=0, j=tagArray.length; i<j; i++){
 			tagArray[i] = tagArray[i].replace(/(^\s*)|(\s*$)/g, "");
 		}
-		var objTags = {
-				func: "tag_people_with_tags",
-				tagList: tagArray
-		};
-		pingPongService.searchUser(objTags, $scope);
+		pingPongService.searchUser({
+			func: "tag_people_with_tags",
+			tagList: tagArray
+		}).then(
+			function(payload) {
+				$scope.userIdsWithTag = payload.userIdsWithTag;
+				$scope.totalMembers = payload.totalMembers;
+			},
+			function(errorPayload) {
+				console.log(errorPayload);
+			});
 	};
 	
 	$scope.ping = function() {
-		var objPing = {
-				func: "ping_to_server",
-				userIdsWithTag: $scope.userIdsWithTag,
-				userId: 'ljhiyh',
-				nickName: 'ljhiyh',
-				question: $scope.pingQuestion
-		};
-		pingPongService.ping(objPing, $scope);
-		
-		//set room timeout
-		$scope.pingCountdown = 30;
-		//set room info
-		var dt = new Date();
-		var room = {
-			time: dt.getFullYear() + '-' + (dt.getMonth()+1) + '-' + dt.getDate()
-				+ ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds(),
-			tagList: $scope.pingTags,
+//set user info
+		pingPongService.ping({
+			func: "ping_to_server",
+			userIdsWithTag: $scope.userIdsWithTag,
+			userId: 'ljhiyh',
+			nickName: 'ljhiyh',
 			question: $scope.pingQuestion
-		};
-//		pingPongService.ping(room, $scope);
-		
+		}).then(
+			function(payload) {
+				//create room
+				$scope.channelId = payload.channelId;
+				$scope.chatList[payload.channelId] = [];
+				$scope.userList[payload.channelId] = $scope.userIdsWithTag;
+				var dt = new Date();
+				var room = {
+					channelId: payload.channelId,
+					time: dt.getFullYear() + '-' + (dt.getMonth()+1) + '-' + dt.getDate()
+						+ ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds(),
+					tagList: $scope.pingTags,
+					pingCountdown : 30
+				};
+				$interval(function(){
+					room.pingCountdown--;
+//if someone connect this room, stop countdown.
+					if(room.pingCountdown == 0)
+						removeDevpinRoom(room.channelId);
+				}, 1000, 30);
+				//make room
+				$scope.myRoomList.push(room);
+			},
+			function(errorPayload) {
+				console.log(errorPayload);
+			});
 		//visible input box
 		$scope.chatInputChecked = true;
-		
-		$interval(function(){
-			$scope.pingCountdown--;
-		}, 1000, 30);
 	};
 	
-	$scope.changeRoom = function(roomId){
-		$scope.roomId = roomId;
+	$scope.changeRoom = function(channelId){
+		changeDevpingRoom(channelId);
 	};
 	
 	$scope.sendMessage = function(){
@@ -90,15 +100,31 @@ devPingApp.controller('PingPongController', function($scope, $interval, pingPong
 				+ ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds(),
 			user: 'I',
 			content: $scope.myMessage,
-			roomId: $scope.roomId
+			channelId: $scope.channelId
 		};
 		//send message
 		pingPongService.sendMessage(message);
 		//input message to chat frame
-		$scope.chatList[$scope.roomId].push(message);
+		$scope.chatList[$scope.channelId].push(message);
 	};
 	
 	$scope.pong = function(){
 		pingPongService.pong($scope.user.id);
+	};
+	
+	function changeDevpingRoom(channelId){
+		$scope.channelId = channelId;
+	};
+	
+	function removeDevpinRoom(channelId){
+		for(var i=0,j=$scope.myRoomList.length;i<j;i++){
+			var room =  $scope.myRoomList[i];
+			if(room.channelId == channelId)
+				$scope.myRoomList.splice(i, 1);
+		}
+		delete $scope.chatList[channelId];
+		delete $scope.userList[channelId];
+		if($scope.channelId == channelId)
+			$scope.channelId = '';
 	};
 });

@@ -16,7 +16,7 @@
 </head>
 <body>
 	<section class="container">
-		<form class="jb-c-form-signin" method="post" action="/main">
+		<form class="jb-c-form-signin" method="post" action="main">
 			<h2 class="jb-c-form-signin-heading">DevPing</h2>
 			<div class="jb-c-login-wrap jb-c-login-social-link">
 				<span>소셜 계정으로 로그인하기</span>
@@ -48,7 +48,7 @@
 	<!-- Modal -->
 	<div class="modal fade" id="registrationModal" tabindex="-1" role="dialog"
 		aria-labelledby="Ping" aria-hidden="true" data-backdrop="static">
-		<form class="modal-dialog" method="post" action="/main">
+		<form class="modal-dialog" method="post" action="main">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
