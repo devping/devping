@@ -132,10 +132,9 @@ public class TagTestController {
     @RequestMapping(value = "/findPeopleWithTagList", method = RequestMethod.POST)
     public ModelAndView findPeopleWithTagListTest(String tagList) {
 
-        TreeSet<String> peopleWithTag = null;
         TreeSet<String> selectedPeople = null;
         List<String> tagListCollection = StringUtil.arrayToList(tagList);
-        peopleWithTag = tagService.findPeopleWithTagList(tagListCollection);
+        selectedPeople = tagService.findPeopleWithTagList(tagListCollection);
 
         //결과값 확인( store )
         ModelAndView model = new ModelAndView("tagTestResult");
@@ -147,57 +146,6 @@ public class TagTestController {
     }
 
 
-    @RequestMapping(value = "/pingRequest", method = RequestMethod.POST)
-    public ModelAndView pingRequestTest( String userId) {
 
-        System.out.println(userId);
-
-
-
-
-
-
-
-//        TreeSet<String> peopleWithTag = null;
-//        TreeSet<String> selectedPeople = null;
-//        StringTokenizer stringTokenizer = new StringTokenizer(tagList);
-//        while (stringTokenizer.hasMoreTokens()) {
-//            peopleWithTag = tagService.findPeopleWithTag(stringTokenizer.nextToken());
-//            combine(selectedPeople, peopleWithTag);
-//        }
-//
-//        //결과값 확인( store )
-//
-        ModelAndView model = new ModelAndView("tagTestResult");
-//        model.addObject("selectedPeople", selectedPeople);
-//        model.addObject("tagList", tagList);
-//        model.addObject("case", "PingRequest");
-
-        return model;
-    }
-
-    private TreeSet combine(TreeSet<String> selectedPeople, TreeSet<String> peopleWithTag) {
-        TreeSet<String> newSelectedPeople = new TreeSet<>();
-        if (selectedPeople == null)
-            selectedPeople = peopleWithTag;
-        else {
-            if (selectedPeople.size() <= peopleWithTag.size()) {
-                for (String selectedPrivousPerson : selectedPeople) {
-                    if(peopleWithTag.contains(selectedPrivousPerson)){
-                        newSelectedPeople.add(selectedPrivousPerson);
-                    }
-                }
-            }else{
-                for (String selectedPersonByTag : peopleWithTag) {
-                    if(selectedPeople.contains(selectedPersonByTag)){
-                        newSelectedPeople.add(selectedPersonByTag);
-                    }
-                }
-            }
-            selectedPeople = newSelectedPeople;
-
-        }
-        return selectedPeople;
-    }
 
 }
