@@ -3,15 +3,15 @@ package org.jbug.devping.vo;
 import java.util.List;
 
 public class PingToServerRequsetVo extends DataVo {
-	private List<UserVo> userIdsWithTag;
+	private List<String> userIdsWithTag;
 	private String userId;
 	private String nickName;
 	private String question;
 	
-	public List<UserVo> getUserIdsWithTag() {
+	public List<String> getUserIdsWithTag() {
 		return userIdsWithTag;
 	}
-	public void setUserIdsWithTag(List<UserVo> userIdsWithTag) {
+	public void setUserIdsWithTag(List<String> userIdsWithTag) {
 		this.userIdsWithTag = userIdsWithTag;
 	}
 	public String getUserId() {

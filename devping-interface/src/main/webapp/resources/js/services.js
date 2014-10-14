@@ -2,7 +2,7 @@ devPingApp.service('pingPongService', function($http, $q){
 	this.selectTags = function(objTags){
 		var deferred = $q.defer();
 		$http({
-			url: urlBase+'/test/traceTagName.ajax',
+			url: urlBase+'cs/traceTagName.ajax',
 			method: "POST",
 			data: objTags,
 			headers: {'Content-Type': 'application/json'}
@@ -16,7 +16,7 @@ devPingApp.service('pingPongService', function($http, $q){
 	this.searchUser = function(objTags){
 		var deferred = $q.defer();
 		$http({
-			url: urlBase+'/test/searchUser.ajax',
+			url: urlBase+'cs/searchUser.ajax',
 			method: "POST",
 			data: objTags,
 			headers: {'Content-Type': 'application/json'}
@@ -30,7 +30,7 @@ devPingApp.service('pingPongService', function($http, $q){
 	this.ping = function(objPing){
 		var deferred = $q.defer();
 		$http({
-			url: urlBase+'/test/ping.ajax',
+			url: urlBase+'cs/ping.ajax',
 			method: "POST",
 			data: objPing,
 			headers: {'Content-Type': 'application/json'}

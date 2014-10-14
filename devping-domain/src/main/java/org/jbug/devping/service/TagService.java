@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.TreeSet;
 
 /**
@@ -32,8 +33,8 @@ public class TagService {
         return tagStore.findTagWithPrefix(prefix);
     }
 
-    public TreeSet<String> findPeopleWithTag(String tag) {
-        return tagStore.findPeopleWithTag(tag);
+    public TreeSet<String> findPeopleWithTagList(List<String> tagList) {
+        return tagStore.findPeopleWithTagList(tagList);
     }
 
 
