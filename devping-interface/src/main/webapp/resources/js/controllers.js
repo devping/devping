@@ -55,8 +55,8 @@ devPingApp.controller('PingPongController', function($scope, $interval, pingPong
 		pingPongService.ping({
 			func: "ping_to_server",
 			userIdsWithTag: $scope.userIdsWithTag,
-			userId: '',
-			nickName: '',
+			userId: 'ljhiyh',
+			nickName: 'ljhiyh',
 			question: $scope.pingQuestion
 		}).then(
 			function(payload) {
@@ -72,11 +72,11 @@ devPingApp.controller('PingPongController', function($scope, $interval, pingPong
 					tagList: $scope.pingTags,
 					pingCountdown : 30
 				};
-				$interval(function(){
+				room.intervalPingCountdown = $interval(function(){
 					room.pingCountdown--;
 //if someone connect this room, stop countdown.
 					if(room.pingCountdown == 0)
-						removeDevpinRoom(room.channelId);
+						$scope.removeDevpinRoom(room.channelId);
 				}, 1000, 30);
 				//make room
 				$scope.myRoomList.push(room);
@@ -89,42 +89,34 @@ devPingApp.controller('PingPongController', function($scope, $interval, pingPong
 	};
 	
 	$scope.changeRoom = function(channelId){
-		changeDevpingRoom(channelId);
+		$scope.channelId = channelId;
 	};
 	
 	$scope.sendMessage = function(){
 		//create message
-		var dt = new Date();
-		var message = {
-			time: dt.getFullYear() + '-' + (dt.getMonth()+1) + '-' + dt.getDate()
-				+ ' ' + dt.getHours() + ':' + dt.getMinutes() + ':' + dt.getSeconds(),
-			user: 'I',
-			content: $scope.myMessage,
-			channelId: $scope.channelId
-		};
 		//send message
-		pingPongService.sendMessage(message);
 		//input message to chat frame
-		$scope.chatList[$scope.channelId].push(message);
+//		$scope.chatList[$scope.channelId].push(message);
 	};
 	
 	$scope.pong = function(){
 		pingPongService.pong($scope.user.id);
 	};
 	
-	function changeDevpingRoom(channelId){
-		$scope.channelId = channelId;
-	};
-	
-	function removeDevpinRoom(channelId){
+	$scope.removeDevpinRoom = function(channelId){
 		for(var i=0,j=$scope.myRoomList.length;i<j;i++){
 			var room =  $scope.myRoomList[i];
-			if(room.channelId == channelId)
+			if(room.channelId == channelId){
+				$interval.cancel(room.intervalPingCountdown);
 				$scope.myRoomList.splice(i, 1);
+				break;
+			}
 		}
 		delete $scope.chatList[channelId];
 		delete $scope.userList[channelId];
-		if($scope.channelId == channelId)
-			$scope.channelId = '';
+		if($scope.channelId == channelId){
+			$scope.channelId = undefined;
+			$scope.chatInputChecked = false;
+		}
 	};
 });
