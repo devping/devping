@@ -16,20 +16,33 @@ devPingApp.controller('PingPongController', function($scope, $interval, pingPong
 		$scope.channelId;
 		$scope.pongCount = 0;
 		$scope.chatInputChecked = false;
+		$scope.tagListChecked = false;
 	};
 	
 	$scope.traceTagName = function() {
+		$scope.tagListChecked = false;
 		var tagArray = $scope.pingTags.split(',');
-		pingPongService.selectTags({
-			func: "tag_prefix",
-			prefix: tagArray[tagArray.length-1].replace(/(^\s*)|(\s*$)/g, "")
-		}).then(
-			function(payload) {
-				$scope.tagList = payload.tagList;
-			},
-			function(errorPayload) {
-				console.log(errorPayload);
-			});
+		var tag = tagArray[tagArray.length-1].replace(/(^\s*)|(\s*$)/g, "");
+		if(tag != null && tag != ''){
+			pingPongService.selectTags({
+				func: "tag_prefix",
+				prefix: tag
+			}).then(
+				function(payload) {
+					$scope.tagList = payload.tagList;
+				},
+				function(errorPayload) {
+					console.log(errorPayload);
+				});
+		}
+		$scope.tagListChecked = ( $scope.tagList != 0 ); 
+	};
+	
+	$scope.clickTag = function(tag) {
+		$scope.tagListChecked = false;
+		var tagArray = $scope.pingTags.split(',');
+		tagArray[tagArray.length-1] = tag;
+		$scope.pingTags = tagArray.join(',');
 	};
 	
 	$scope.searchUser = function() {
@@ -52,6 +65,14 @@ devPingApp.controller('PingPongController', function($scope, $interval, pingPong
 	
 	$scope.ping = function() {
 //set user info
+		console.log({
+			func: "ping_to_server",
+			userIdsWithTag: $scope.userIdsWithTag,
+			userId: 'ljhiyh',
+			nickName: 'ljhiyh',
+			question: $scope.pingQuestion
+		});
+		
 		pingPongService.ping({
 			func: "ping_to_server",
 			userIdsWithTag: $scope.userIdsWithTag,
