@@ -65,10 +65,10 @@
             </div>
             <div class="row social-button-row">
                 <div class="col-lg-4">
-                    <form id="google" action="/auth/google" method="POST">
+                    <form id="google" action="/auth/google" method="GET">
                         <input type="hidden" name="scope" value="profile" />
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <input type="hidden" name="redirect_uri" value="http://devping.com:8080/auth/google"/>
+                        <%--<input type="hidden" name="redirect_uri" value="http://devping.com:8080/auth/google"/>--%>
                         <button type="submit" class="btn btn-lg btn-google"><i class="fa fa-google-plus"></i> | Sign Up with Google</button></a><br />
                     </form>
                     <%--<a href="/auth/google"><button class="btn btn-twitter"><i class="icon-twitter"></i> | google</button></a>--%>

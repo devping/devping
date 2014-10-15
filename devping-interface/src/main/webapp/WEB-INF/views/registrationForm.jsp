@@ -7,7 +7,7 @@
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/app/user.form.js"></script>
+    <%--<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/app/user.form.js"></script>--%>
 </head>
 <body>
     <div class="page-header">
@@ -16,7 +16,7 @@
     <sec:authorize access="isAnonymous()">
         <div class="panel panel-default">
             <div class="panel-body">
-                <form:form action="/user/register" commandName="user" method="POST" enctype="utf8" role="form">
+                <form:form action="http://devping.com:8080/user/register" commandName="user" method="POST" enctype="utf8" role="form">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <c:if test="${user.signInProvider != null}">
                         <form:hidden path="signInProvider"/>

@@ -5,5 +5,6 @@ package org.jbug.devping.domain.social;
  */
 public enum SocialMediaService {
     FACEBOOK,
-    TWITTER
+    TWITTER,
+    GOOGLE
 }
