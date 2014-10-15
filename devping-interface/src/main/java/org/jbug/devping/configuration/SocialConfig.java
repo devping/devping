@@ -36,10 +36,14 @@ public class SocialConfig implements SocialConfigurer {
 //                env.getProperty("twitter.consumer.key"),
 //                env.getProperty("twitter.consumer.secret")
 //        ));
-        cfConfig.addConnectionFactory(new FacebookConnectionFactory(
+
+        FacebookConnectionFactory fcf = new FacebookConnectionFactory(
                 "1487938974801143",
                 "b53bfee1bbc43715311e12e109d90621"
-        ));
+        );
+        fcf.setScope("email");
+        cfConfig.addConnectionFactory(fcf);
+
 //        cfConfig.addConnectionFactory(new GoogleConnectionFactory(
 //                "298688116141-tomf8f4jkunlankbd4c55nu9bp83h963.apps.googleusercontent.com",
 //                "iGEoPkecoD4Gu1RTjNKAoxFl"

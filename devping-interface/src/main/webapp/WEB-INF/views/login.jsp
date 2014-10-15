@@ -6,7 +6,7 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/social-buttons-3.css"/>
+    <%--<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/social-buttons-3.css"/>--%>
 </head>
 <body>
 <div class="page-header">
@@ -53,9 +53,13 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <h2>social sign in</h2>
-            <div class="row social-button-row">
+            <div class="row social-button-3social-button-row">
                 <div class="col-lg-4">
-                    <a href="/auth/facebook"><button class="btn btn-facebook"><i class="icon-facebook"></i> | facebook</button></a>
+                    <form id="facebook" action="/auth/facebook" method="POST">
+                        <input type="hidden" name="scope" value="email" />
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <button type="submit" class="btn btn-lg btn-facebook"><i class="fa fa-facebook-plus"></i> | Sign Up with Facebook</button></a><br />
+                    </form>
                 </div>
             </div>
             <div class="row social-button-row">
@@ -66,7 +70,7 @@
             <div class="row social-button-row">
                 <div class="col-lg-4">
                     <form id="google" action="/auth/google" method="POST">
-                        <input type="hidden" name="scope" value="profile" />
+                        <input type="hidden" name="scope" value="email" />
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <input type="hidden" name="redirect_uri" value="http://devping.com:8080/auth/google"/>
                         <button type="submit" class="btn btn-lg btn-google"><i class="fa fa-google-plus"></i> | Sign Up with Google</button></a><br />

@@ -29,7 +29,12 @@ public class HomeController {
 private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	private int id = 0;
-	
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String home2(Model model, HttpServletRequest request) {
+        return "home";
+    }
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */

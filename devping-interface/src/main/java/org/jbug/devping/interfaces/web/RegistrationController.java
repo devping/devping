@@ -85,10 +85,15 @@ public class RegistrationController {
      * Processes the form submissions of the registration form.
      */
     @RequestMapping(value ="/register", method = RequestMethod.POST)
+
     public String registerUserAccount(@Valid @ModelAttribute("user") RegistrationForm userAccountData,
                                       BindingResult result,
                                       WebRequest request) throws DuplicateEmailException {
         LOGGER.debug("Registering user account with information: {}", userAccountData);
+
+
+
+
         if (result.hasErrors()) {
             LOGGER.debug("Validation errors found. Rendering form view.");
             return VIEW_NAME_REGISTRATION_PAGE;
@@ -114,7 +119,7 @@ public class RegistrationController {
         //do anything.
         ProviderSignInUtils.handlePostSignUp(registered.getEmail(), request);
 
-        return "redirect:/";
+        return "login";
     }
 
     /**
