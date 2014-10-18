@@ -24,28 +24,39 @@ public class PushTestController {
 
     private static final Logger logger = LoggerFactory.getLogger(PushTestController.class);
 
-    @RequestMapping(value = "/push" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/push", method = RequestMethod.GET)
     public String push(Locale locale, Model model, HttpServletRequest request) {
 
-        logger.info("PushTestController");
+        logger.info("/push");
+        return "pushForm";
+    }
+
+    @RequestMapping(value = "/pushToMobile", method = RequestMethod.POST)
+    public String pushToMobile(Locale locale, Model model, HttpServletRequest request) {
+
+        logger.info("/pushToMobile");
 
         String message = request.getParameter("message");
         String deviceId = request.getParameter("deviceId");
+        String apiKey = request.getParameter("apiKey");
+
 
         try {
 
             message = Util.URLEncode(message, "UTF-8");
             final Message.Builder messageBuilder = new Message.Builder();
             messageBuilder.addData("msg", message);
-            final Result result = new Sender("API_KEY").send(messageBuilder.build(), deviceId, 5);
+            final Result result = new Sender(apiKey).send(messageBuilder.build(), deviceId, 5);
             final String messageId = result.getMessageId();
 
-            boolean success = (messageId != null);
+            //boolean success = (messageId != null);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "/";
+        return "hello";
     }
+
+
 }

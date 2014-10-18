@@ -27,7 +27,7 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-@RequestMapping(value = "/main")
+    @RequestMapping(value = "/main")
 	public String home(Locale locale, Model model, HttpServletRequest request) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
