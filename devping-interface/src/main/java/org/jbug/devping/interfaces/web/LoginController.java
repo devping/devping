@@ -16,25 +16,5 @@ public class LoginController {
             return "login";
     }
 
-    @RequestMapping(value = "/oauth2callback", method = RequestMethod.GET)
-    public String oauth2callback(@RequestParam("code") String code, @RequestParam("state") String state) {
-        System.out.println(code);
-//        logger.info("code: {}", code);
-//        GoogleAPIAdapter ga = new GoogleAPIAdapter();
-//        GoogleTokenDto googleTokenDto = ga.getTokens(code);
-//        System.out.println(googleTokenDto.getId_token());
-//
-//        Jwt jwt = JwtHelper.decode(googleTokenDto.getId_token());
-//        String claims = jwt.getClaims();
-//
-//        ObjectMapper om = new ObjectMapper();
-//
-//        try {
-//            GoogleClaim gc = om.readValue(claims, GoogleClaim.class);
-//            System.out.println(gc.getEmail());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        return "oauth2callback";
-    }
+
 }

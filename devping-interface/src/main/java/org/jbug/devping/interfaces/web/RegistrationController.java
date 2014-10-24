@@ -81,7 +81,7 @@ public class RegistrationController {
         return dto;
     }
 
-    /**
+    /**˙
      * Processes the form submissions of the registration form.
      */
     @RequestMapping(value ="/register", method = RequestMethod.POST)

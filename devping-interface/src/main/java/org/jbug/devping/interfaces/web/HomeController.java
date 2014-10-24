@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.jbug.devping.domain.member.Member;
 import org.jbug.devping.domain.member.MemberService;
@@ -51,7 +50,7 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-@RequestMapping(value = "/main", method = RequestMethod.GET)
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, HttpServletRequest request) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 
@@ -114,7 +113,6 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
         logger.info("server get message!");
         logger.info(data.toString());
         return "server get message!";
-    }
 	}
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
@@ -134,7 +132,7 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
         Jwt jwt = JwtHelper.decode(googleTokenDto.getId_token());
         String claims = jwt.getClaims();
 
-        ObjectMapper om = new ObjectMapper();
+        org.codehaus.jackson.map.ObjectMapper om = new org.codehaus.jackson.map.ObjectMapper();
 
         try {
             GoogleClaim gc = om.readValue(claims, GoogleClaim.class);
