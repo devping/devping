@@ -1,0 +1,13 @@
+{
+    "func": "pingChannelResponse",
+    "joinUser": [
+        {
+            "userId": "jooho"
+        },
+        {
+            "nickName": "Client1"
+        }
+    ],
+    "channelId": "ljhiyh/chat/12345",
+    "date": "2014-10-04 13:55:29 +0100"
+}

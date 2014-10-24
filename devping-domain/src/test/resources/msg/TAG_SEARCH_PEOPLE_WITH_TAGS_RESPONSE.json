@@ -1,0 +1,11 @@
+{
+    "func": "tag_people_with_tags",
+    "tagList" : [
+         "java", "jboss"
+    ],
+    "userIdsWithTag" : [
+        { "userId" : "jooho", "nickName" : "Client1" },
+        { "userId" : "redhat", "nickName" : "Client2" }
+    ],
+    "TotalMembers" : 2
+}

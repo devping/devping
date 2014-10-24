@@ -1,9 +1,11 @@
 package org.jbug.devping.interfaces.api;
 
 import org.jbug.devping.service.TagService;
+import org.jbug.devping.vo.TagPrefixVo;
 import org.jbug.devping.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,29 +23,17 @@ public class CSCmdController {
     private HashMap<String, UserVo> TestUserVo = new HashMap<>();
 
 
-    @RequestMapping(value = "/pingRequest", method = RequestMethod.POST)
+    @RequestMapping(value = "/tagPrefix", method = {RequestMethod.POST, RequestMethod.GET})
     public
     @ResponseBody
-    Project pingRequestTest() {
+    TagPrefixVo pingRequestTest(@RequestBody final TagPrefixVo tagPrefixVo) {
 
-//        JSONParser parser = new JSONParser();
-//        try {
-//            JSONObject jObj = (JSONObject) parser.parse(pingDataJson);
-//            System.out.println(jObj);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
+        System.out.println(tagPrefixVo);
+
         System.out.println("test");
-        return new Project("devping");
+        return tagPrefixVo;
 
 
-//        TreeSet<String> peopleWithTag = null;
-//        TreeSet<String> selectedPeople = null;
-//        StringTokenizer stringTokenizer = new StringTokenizer(tagList);
-//        while (stringTokenizer.hasMoreTokens()) {
-//            peopleWithTag = tagService.findPeopleWithTag(stringTokenizer.nextToken());
-//            combine(selectedPeople, peopleWithTag);
-//        }
 //
 //        //결과값 확인( store )
 //
@@ -55,21 +45,7 @@ public class CSCmdController {
 //        return model;
     }
 
-    class Project {
-        private String projectName;
 
-        Project(String projectName) {
-            this.projectName = projectName;
-        }
-
-        public String getProjectName() {
-            return projectName;
-        }
-
-        public void setProjectName(String projectName) {
-            this.projectName = projectName;
-        }
-    }
 
 
 }

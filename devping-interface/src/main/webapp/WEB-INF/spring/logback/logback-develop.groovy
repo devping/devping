@@ -13,7 +13,7 @@ import static ch.qos.logback.core.spi.FilterReply.NEUTRAL
 dailyRollingFileAppender = { args ->
     def appenderName = args.name
     def filename = args.file
-    def logPattern = args.pattern ?: '%-5level %d{yyyy-MM-dd HH:mm:ss} [%thread] %logger{36} - %msg%n'
+    def logPattern = args.pattern ?: '%-5level %d{yyyy-MM-dd HH:mm:ss} [%thread] %logger{36} - %channel%n'
     def maxHistoryCount = args.maxHistory ?: 10 // 기본 10일
     def minLevel = args.level
     def logMarker = args.marker
@@ -55,7 +55,7 @@ dailyRollingFileAppender = { args ->
  */
 logbackParent.appender('stdout', ConsoleAppender) {
     encoder(PatternLayoutEncoder) {
-        pattern = '%-5level %d{yyyy-MM-dd HH:mm:ss} [%thread] %logger{36}.%method - %msg%n'
+        pattern = '%-5level %d{yyyy-MM-dd HH:mm:ss} [%thread] %logger{36}.%method - %channel%n'
     }
     filter(EvaluatorFilter) {
         evaluator(OnMarkerEvaluator) {
@@ -69,7 +69,7 @@ logbackParent.appender('stdout', ConsoleAppender) {
 /**
  * errorFile Appender 생성
  */
-dailyRollingFileAppender(name: 'errorFile', file: '/error_log/error.log', pattern: '%-5level %d{yyyy-MM-dd HH:mm:ss} [%thread] %logger{36} - %msg [%mdc]%n',
+dailyRollingFileAppender(name: 'errorFile', file: '/error_log/error.log', pattern: '%-5level %d{yyyy-MM-dd HH:mm:ss} [%thread] %logger{36} - %channel [%mdc]%n',
         maxHistory: 30, level: ERROR, compress: false)
 
 def HOSTNAME = hostname

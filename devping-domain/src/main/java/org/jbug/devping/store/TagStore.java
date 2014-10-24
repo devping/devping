@@ -74,15 +74,56 @@ public class TagStore {
         return tagListWithPrefix;
     }
 
-    public TreeSet<String> findPeopleWithTag(String tag) {
+    private TreeSet<String> findPeopleWithTag(String tag) {
 
-        TreeSet<String> people = (TreeSet) tagCache.get(tag);
+        TreeSet<String> peopleWithTag = (TreeSet) tagCache.get(tag);
 //        System.out.println(people.size());
 //        System.out.println(people.contains("ljhiyh"));
-        if (people == null)
-            people = new TreeSet<>();
-        return people;
+        if (peopleWithTag == null)
+            peopleWithTag = new TreeSet<>();
 
+        return peopleWithTag;
+
+    }
+    public TreeSet<String> findPeopleWithTagList(List<String> tagList) {
+        TreeSet<String> peopleWithTag = null;
+        TreeSet<String> selectedPeople = null;
+
+        if (tagList.size() <0) {
+            selectedPeople = new TreeSet<>();
+        }else{
+            for(String tag : tagList){
+                peopleWithTag = findPeopleWithTag(tag);
+                selectedPeople = combine(selectedPeople, peopleWithTag);
+            }
+        }
+        return selectedPeople;
+
+    }
+
+
+    private TreeSet combine(TreeSet<String> selectedPeople, TreeSet<String> peopleWithTag) {
+        TreeSet<String> newSelectedPeople = new TreeSet<>();
+        if (selectedPeople == null)
+            selectedPeople = peopleWithTag;
+        else {
+            if (selectedPeople.size() <= peopleWithTag.size()) {
+                for (String selectedPrivousPerson : selectedPeople) {
+                    if(peopleWithTag.contains(selectedPrivousPerson)){
+                        newSelectedPeople.add(selectedPrivousPerson);
+                    }
+                }
+            }else{
+                for (String selectedPersonByTag : peopleWithTag) {
+                    if(selectedPeople.contains(selectedPersonByTag)){
+                        newSelectedPeople.add(selectedPersonByTag);
+                    }
+                }
+            }
+            selectedPeople = newSelectedPeople;
+
+        }
+        return selectedPeople;
     }
 
 

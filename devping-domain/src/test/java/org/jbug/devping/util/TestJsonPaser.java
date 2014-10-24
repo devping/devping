@@ -16,7 +16,7 @@ import java.util.Iterator;
  * Created by jhouse on 10/3/14.
  */
 public class TestJsonPaser {
-    final String TEST_DATA_FILE = "/Users/jhouse/dev/git/devping/devping-domain/src/test/resources/msg/PING.json";
+    final String TEST_DATA_FILE = "/Users/jhouse/dev/git/devping/devping-domain/src/test/resources/channel/PING_SERVER_REQEUST.json";
 
     @Test
     public void testPaser() throws Exception {
@@ -39,10 +39,26 @@ public class TestJsonPaser {
 
         Iterator<JSONObject> driveIterator = userIdsWithTagList.iterator();
         while (driveIterator.hasNext()) {
-            Assert.assertEquals(expectedUserList[count++],driveIterator.next().get("userId"));
+            Assert.assertEquals(expectedUserList[count++], driveIterator.next().get("userId"));
         }
     }
 
+    @Test
+    public void TestStringToObject() throws Exception{
+        String stringJson= "{ \"userId\": \"ljhiyh\",\n" +
+                "    \"nickName\": \"트레이닝맨\",\n" +
+                "    \"question\": \"MQTT 구현하자\",\n" +
+                "    \"channelId\": \"ljhiyh/chat/12345\",\n" +
+                "    \"date\": \"2014-10-04 13:55:29 +0100\"\n" +
+                "}";
+        JSONParser parser = new JSONParser();
+
+        Object obj = parser.parse(stringJson);
+        JSONObject jsonObject = (JSONObject) obj;
+
+        String name = (String) jsonObject.get("userId");
+        Assert.assertEquals("ljhiyh", name);
+    }
 
     public void TestCSCommandFasade() throws Exception {
         JSONParser parser = new JSONParser();
