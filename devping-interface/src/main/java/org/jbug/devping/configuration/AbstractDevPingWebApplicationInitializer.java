@@ -11,6 +11,7 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.DispatcherType;
@@ -81,6 +82,14 @@ public abstract class AbstractDevPingWebApplicationInitializer implements WebApp
      */
     protected void loadDefaultFilters(ServletContext servletContext) {
         addEncodingFilter(servletContext);
+
+
+        EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
+
+        FilterRegistration.Dynamic security = servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
+        security.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
+
+
     }
 
     /** Character Encoding Filter */

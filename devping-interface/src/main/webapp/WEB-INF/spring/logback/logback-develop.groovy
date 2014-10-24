@@ -76,5 +76,6 @@ def HOSTNAME = hostname
 logbackParent = this
 
 logger('org.jbug', DEBUG)
+logger('org.springframework', DEBUG)
 
 root(INFO, ['stdout'])

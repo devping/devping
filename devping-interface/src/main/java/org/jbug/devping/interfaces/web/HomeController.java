@@ -12,6 +12,8 @@ import org.jbug.devping.interfaces.adapter.GoogleClaim;
 import org.jbug.devping.interfaces.adapter.GoogleTokenDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.jwt.Jwt;
+import org.springframework.security.jwt.JwtHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.jwt.Jwt;
 import org.springframework.security.jwt.JwtHelper;
@@ -29,7 +31,7 @@ import javax.servlet.http.HttpServletRequest;
  * Handles requests for the application home page.
  */
 @Controller
-@RequestMapping(value = "/")
+//@RequestMapping(value = "/")
 public class HomeController {
 	
 private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -39,10 +41,16 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
     @Autowired
     MemberService memberService;
 	
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String home2(Model model, HttpServletRequest request) {
+        return "home";
+    }
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-@RequestMapping(value = "/main", method = RequestMethod.GET)
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, HttpServletRequest request) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 
@@ -75,11 +83,11 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 		return "login";
 	}
 	
-	@RequestMapping(value="/login")
-	public String login(Locale locale, Model model) {
-		logger.info("Welcome login! The client locale is {}.", locale);
-		return "login";
-	}
+//	@RequestMapping(value="/login")
+//	public String login(Locale locale, Model model) {
+//		logger.info("Welcome login! The client locale is {}.", locale);
+//		return "login";
+//	}
 	
 	@RequestMapping(value = "/ping.do", method = RequestMethod.POST)
 	public @ResponseBody String ping(Locale locale, @RequestBody HashMap data) {
@@ -93,6 +101,18 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 		logger.info("server get message!");
 		logger.info(data.toString());
 		return "server get message!";
+    }
+//    @RequestMapping(value = "/signin", method = RequestMethod.GET)
+//    public @ResponseBody String signin(Locale locale, @RequestBody HashMap data) {
+//        logger.info("server get message!");
+//        logger.info(data.toString());
+//        return "server get message!";
+//    }
+    @RequestMapping(value = "/auth/google", method = RequestMethod.GET)
+    public @ResponseBody String authgoogle(Locale locale, @RequestBody HashMap data) {
+        logger.info("server get message!");
+        logger.info(data.toString());
+        return "server get message!";
 	}
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
@@ -112,7 +132,7 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
         Jwt jwt = JwtHelper.decode(googleTokenDto.getId_token());
         String claims = jwt.getClaims();
 
-        ObjectMapper om = new ObjectMapper();
+        org.codehaus.jackson.map.ObjectMapper om = new org.codehaus.jackson.map.ObjectMapper();
 
         try {
             GoogleClaim gc = om.readValue(claims, GoogleClaim.class);
