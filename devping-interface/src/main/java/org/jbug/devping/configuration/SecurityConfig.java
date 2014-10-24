@@ -29,27 +29,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserRepository userRepository;
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
-        web
-                //Spring Security ignores request to static resources such as CSS or JS files.
-                .ignoring()
-                .antMatchers("/resources/**");
-    }
+        public void configure(WebSecurity web) throws Exception {
+            web
+                    //Spring Security ignores request to static resources such as CSS or JS files.
+                    .ignoring()
+                    .antMatchers("/resources/**");
+        }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                //Configures form login
-                .formLogin()
-                .loginPage("/signin")
-                .loginProcessingUrl("/signin/authenticate")
-                .failureUrl("/signin?error=bad_credentials")
-                        //Configures the logout function
-                .and()
-                .logout()
-                .deleteCookies("JSESSIONID")
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login")
+        @Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http
+                    //Configures form login
+                    .formLogin()
+                    .loginPage("/signin")
+                    .loginProcessingUrl("/signin/authenticate")
+                    .failureUrl("/signin?error=bad_credentials")
+                            //Configures the logout function
+                    .and()
+                    .logout()
+                    .deleteCookies("JSESSIONID")
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/login")
                         //Configures url based authorization
                 .and()
                 .authorizeRequests()
