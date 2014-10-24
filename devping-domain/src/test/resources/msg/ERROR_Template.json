@@ -1,0 +1,8 @@
+{
+    "error": [
+        {
+            "errorId": "S001",
+            "errorMessage": "Server Error: please check server log"
+        }
+    ]
+}

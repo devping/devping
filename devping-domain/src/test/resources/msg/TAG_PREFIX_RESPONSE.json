@@ -1,0 +1,7 @@
+{
+    "func": "tag_prefix",
+    "prefix" : "ja",
+    "tagList" : [
+         "java", "jboss"
+    ]
+}

@@ -1,0 +1,6 @@
+{
+    "func": "tag_people_with_tags",
+    "tagList" : [
+        "java","jboss"
+    ]
+}

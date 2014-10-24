@@ -11,6 +11,7 @@
 <head>
     <title>Tag Test Page</title>
 </head>
+
 <body>
 <h1>Tag Test Page</h1>
 
@@ -65,12 +66,12 @@
     </table>
 </form>
 
-<h3>Find People With the Tag</h3>
-<form method="post" action="./findPeopleWithTag">
+<h3>Find People With the TagList</h3>
+<form method="post" action="./findPeopleWithTagList">
     <table>
         <tr>
             <td>Tag</td>
-            <td><input type="text" name="tag"/></td>
+            <td><input type="text" name="tagList"/></td>
         </tr>
 
         <tr>

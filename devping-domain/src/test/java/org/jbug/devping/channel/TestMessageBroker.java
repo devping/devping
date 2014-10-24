@@ -1,4 +1,4 @@
-package org.jbug.devping.msg;
+package org.jbug.devping.channel;
 
 import org.jbug.devping.vo.UserVo;
 import org.junit.Test;

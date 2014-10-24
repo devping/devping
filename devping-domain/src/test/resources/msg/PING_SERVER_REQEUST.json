@@ -1,0 +1,14 @@
+{
+    "func": "pingToServer",
+    "userIdsWithTag": [
+        {
+            "userId": "jooho"
+        },
+        {
+            "userId": "redhat"
+        }
+    ],
+    "userId": "ljhiyh",
+    "nickName": "ljhiyh",
+    "question": "MQTT 구현하자"
+}
