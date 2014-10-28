@@ -31,5 +31,5 @@ Project config
 DB setup
 ---------
 1. DB 생성 => devping
-2. 계정 생성 및 권한 부여
+2. 계정 생성(devping//devping) 및 권한 부여
 3. schema 생성 (/devping-domain/src/main/resources/db/schema.sql)
