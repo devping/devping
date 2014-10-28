@@ -16,9 +16,4 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String redirectRequestToRegistrationPage() {
-        return "redirect:/register";
-    }
-
 }
