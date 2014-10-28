@@ -28,4 +28,8 @@ Project config
           안될 때는 maven clean과 maven build를 통해 Error를 확인하신 뒤 Root에서 한번 더 확인 후 작업 바랍니다.
 
 
-
+DB setup
+---------
+1. DB 생성 => devping
+2. 계정 생성 및 권한 부여
+3. schema 생성 (/devping-domain/src/main/resources/db/schema.sql)
