@@ -13,8 +13,12 @@ public class LoginController {
 
     @RequestMapping(value = "/signin", method = RequestMethod.GET)
     public String showLoginPage() {
-            return "login";
+        return "login";
     }
 
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    public String redirectRequestToRegistrationPage() {
+        return "redirect:/register";
+    }
 
 }

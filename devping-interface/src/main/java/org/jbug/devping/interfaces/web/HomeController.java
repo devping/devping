@@ -88,39 +88,4 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 		logger.info(data.toString());
 		return "server get message!";
     }
-//    @RequestMapping(value = "/signin", method = RequestMethod.GET)
-//    public @ResponseBody String signin(Locale locale, @RequestBody HashMap data) {
-//        logger.info("server get message!");
-//        logger.info(data.toString());
-//        return "server get message!";
-//    }
-    @RequestMapping(value = "/auth/google", method = RequestMethod.GET)
-    public @ResponseBody String authgoogle(Locale locale, @RequestBody HashMap data) {
-        logger.info("server get message!");
-        logger.info(data.toString());
-        return "server get message!";
-	}
-
-
-    @RequestMapping(value = "/oauth2callback", method = RequestMethod.GET)
-    public String oauth2callback(@RequestParam("code") String code) {
-        logger.info("code: {}", code);
-        GoogleAPIAdapter ga = new GoogleAPIAdapter();
-        GoogleTokenDto googleTokenDto = ga.getTokens(code);
-        System.out.println(googleTokenDto.getId_token());
-
-        Jwt jwt = JwtHelper.decode(googleTokenDto.getId_token());
-        String claims = jwt.getClaims();
-
-        org.codehaus.jackson.map.ObjectMapper om = new org.codehaus.jackson.map.ObjectMapper();
-
-        try {
-            GoogleClaim gc = om.readValue(claims, GoogleClaim.class);
-            System.out.println(gc.getEmail());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return "oauth2callback";
-    }
 }
