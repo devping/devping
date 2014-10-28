@@ -1,12 +1,5 @@
 package org.jbug.devping.interfaces.web;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Locale;
-
-import org.codehaus.jackson.map.ObjectMapper;
-import org.jbug.devping.domain.member.Member;
-import org.jbug.devping.domain.member.MemberService;
 import org.jbug.devping.interfaces.adapter.GoogleAPIAdapter;
 import org.jbug.devping.interfaces.adapter.GoogleClaim;
 import org.jbug.devping.interfaces.adapter.GoogleTokenDto;
@@ -14,18 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.jwt.Jwt;
 import org.springframework.security.jwt.JwtHelper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.jwt.Jwt;
-import org.springframework.security.jwt.JwtHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Locale;
 
 /**
  * Handles requests for the application home page.
@@ -38,9 +27,6 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	
 	private int id = 0;
 
-    @Autowired
-    MemberService memberService;
-	
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home2(Model model, HttpServletRequest request) {
@@ -115,12 +101,6 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
         return "server get message!";
 	}
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public @ResponseBody String sendMessage() {
-
-        Member member = memberService.findOne("devping@devping.com");
-        return "server get message!";
-    }
 
     @RequestMapping(value = "/oauth2callback", method = RequestMethod.GET)
     public String oauth2callback(@RequestParam("code") String code) {
@@ -140,10 +120,6 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
-
 
         return "oauth2callback";
     }

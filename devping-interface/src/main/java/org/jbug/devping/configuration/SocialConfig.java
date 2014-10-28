@@ -44,11 +44,6 @@ public class SocialConfig implements SocialConfigurer {
         fcf.setScope("email");
         cfConfig.addConnectionFactory(fcf);
 
-//        cfConfig.addConnectionFactory(new GoogleConnectionFactory(
-//                "298688116141-tomf8f4jkunlankbd4c55nu9bp83h963.apps.googleusercontent.com",
-//                "iGEoPkecoD4Gu1RTjNKAoxFl"
-//        ));
-
         GoogleConnectionFactory gcf = new GoogleConnectionFactory("298688116141-tomf8f4jkunlankbd4c55nu9bp83h963.apps.googleusercontent.com", "iGEoPkecoD4Gu1RTjNKAoxFl");
         gcf.setScope("profile");
         cfConfig.addConnectionFactory(gcf);
