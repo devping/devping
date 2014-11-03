@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logout()
                     .deleteCookies("JSESSIONID")
                     .logoutUrl("/logout")
-                    .logoutSuccessUrl("/login")
+                    .logoutSuccessUrl("/signin")
                         //Configures url based authorization
                 .and()
                 .authorizeRequests()
