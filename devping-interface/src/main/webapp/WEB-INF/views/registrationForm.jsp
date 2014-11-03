@@ -42,6 +42,14 @@
                             <form:errors id="error-email" path="email" cssClass="help-block"/>
                         </div>
                     </div>
+                    <div class="row">
+                        <div id="form-group-tags" class="form-group col-lg-4">
+                            <label class="control-label" for="user-tags">tags(should be comma seperated):</label>
+                            <form:input id="user-tags" path="tags" cssClass="form-control"/>
+                            <form:errors id="user-tags" path="tags" cssClass="help-block"/>
+                        </div>
+                    </div>
+
                     <c:if test="${user.signInProvider == null}">
                         <div class="row">
                             <div id="form-group-password" class="form-group col-lg-4">

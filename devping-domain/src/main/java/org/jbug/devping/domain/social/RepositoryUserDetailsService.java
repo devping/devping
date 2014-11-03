@@ -46,6 +46,7 @@ public class RepositoryUserDetailsService implements UserDetailsService {
                 .role(user.getRole())
                 .socialSignInProvider(user.getSignInProvider())
                 .username(user.getEmail())
+                .tags(user.getTags())
                 .build();
 
         LOGGER.debug("Returning user details: {}", principal);

@@ -1,10 +1,13 @@
 package org.jbug.devping.interfaces.web;
 
+import org.jbug.devping.domain.social.ExampleUserDetails;
 import org.jbug.devping.interfaces.adapter.GoogleAPIAdapter;
 import org.jbug.devping.interfaces.adapter.GoogleClaim;
 import org.jbug.devping.interfaces.adapter.GoogleTokenDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.jwt.Jwt;
 import org.springframework.security.jwt.JwtHelper;
 import org.springframework.stereotype.Controller;
@@ -88,4 +91,24 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 		logger.info(data.toString());
 		return "server get message!";
     }
+
+    @RequestMapping(value = "/loaduser", method = RequestMethod.GET)
+    public @ResponseBody String test1(Locale locale, Model model, HttpServletRequest request) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Object o = (auth != null) ? auth.getPrincipal() :  null;
+
+        ExampleUserDetails user = null;
+
+        if (o != null && o instanceof ExampleUserDetails) {
+            user = (ExampleUserDetails) o;
+            //get details from model object
+            return user.getTags();
+        }
+
+        return "user load error";
+    }
+
+
+
 }
