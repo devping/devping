@@ -44,14 +44,17 @@ public class TagTestController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login() {
-        UserVo userVo = new UserVo();
-        userVo.setName("Jooho Lee");
-        userVo.setUserId("ljhiyh");
-        userVo.setNickName("Jhouse");
         HashSet<String> tagList = new HashSet<>();
         tagList.add("java");
         tagList.add("jboss");
-        userVo.setPersonalTagList(tagList);
+
+        UserVo userVo = UserVo.getBuilder()
+                .userId("ljhiyh")
+                .firstName("Jooho")
+                .lastName("Lee")
+                .personalTagList(tagList)
+                .build();
+
         httpSession.setAttribute("userVo",userVo);
 
         return "/echo";
@@ -70,9 +73,12 @@ public class TagTestController {
             personalTag.add(stringTokenizer.nextToken());
         }
 
-        UserVo userVo = new UserVo();
-        userVo.setName(id);
-        userVo.setPersonalTagList(personalTag);
+        UserVo userVo = UserVo.getBuilder()
+                .userId(id)
+                .firstName("Jooho")
+                .lastName("Lee")
+                .personalTagList(personalTag)
+                .build();
         TestUserVo.put(id, userVo);
         tagService.LoginUpdateTagService(userVo);
 

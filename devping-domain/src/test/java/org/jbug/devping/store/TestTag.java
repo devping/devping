@@ -164,17 +164,17 @@ public class TestTag {
         tag3.add("wildfly");
         tag3.add("레드");
 
-        UserVo user1 = new UserVo.Builder()
+        UserVo user1 = UserVo.getBuilder()
                 .userId("ljhiyh")
                 .personalTagList(tag1)
                 .build();
 
-        UserVo user2 =  new UserVo.Builder()
+        UserVo user2 =  UserVo.getBuilder()
                 .userId("jhouse")
                 .personalTagList(tag2)
                 .build();
 
-        UserVo user3 = new UserVo.Builder()
+        UserVo user3 = UserVo.getBuilder()
                 .userId("jooho")
                 .personalTagList(tag3)
                 .build();
