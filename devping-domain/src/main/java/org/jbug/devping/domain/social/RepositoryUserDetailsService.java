@@ -1,5 +1,6 @@
 package org.jbug.devping.domain.social;
 
+import org.jbug.devping.service.TagService;
 import org.jbug.devping.utils.StringUtil;
 import org.jbug.devping.vo.UserVo;
 import org.slf4j.Logger;
@@ -22,6 +23,9 @@ public class RepositoryUserDetailsService implements UserDetailsService {
     public RepositoryUserDetailsService(UserRepository repository) {
         this.repository = repository;
     }
+
+    @Autowired
+    private TagService tagService;
 
     /**
      * Loads the user information.
@@ -51,7 +55,13 @@ public class RepositoryUserDetailsService implements UserDetailsService {
                 .personalTagList(StringUtil.arrayToSet(user.getTags(), ","))
                 .build();
 
+        tagService.loginUpdateTagService(principal);
+
+
         LOGGER.debug("Returning user details: {}", principal);
+
+
+
 
         return principal;
     }

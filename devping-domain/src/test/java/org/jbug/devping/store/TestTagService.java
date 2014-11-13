@@ -37,7 +37,7 @@ public class TestTagService {
 //	 * 로그인 할때 - Tag 추가 - User 추가 - Rank 추가
 //	 */
 //	@Test
-//	public void LoginUpdateTagService() throws Exception {
+//	public void loginUpdateTagService() throws Exception {
 //
 //		String UserName1 = "ljhiyh";
 //		String UserName2 = "jhouse";
@@ -48,16 +48,16 @@ public class TestTagService {
 //		UserVo user3 = userLogin(UserName3);
 //
 //		// Add 8 tags for user1 (ljhiyh)
-//		tagService.LoginUpdateTagService(user1);
+//		tagService.loginUpdateTagService(user1);
 //		assertEquals(8, tagTree.size());
 //
 //		// Add 6 tags but 3tags are different from user1(ljhiyh)
-//		tagService.LoginUpdateTagService(user2);
+//		tagService.loginUpdateTagService(user2);
 //		assertEquals(11, tagTree.size());
 //
 //		// Add 7 tags but 1tags are different from
 //		// user1(ljhiyh),user2(jhouse)
-//		tagService.LoginUpdateTagService(user3);
+//		tagService.loginUpdateTagService(user3);
 //		assertEquals(12, tagTree.size());
 //
 //		// Check user list for each store
@@ -120,7 +120,7 @@ public class TestTagService {
 
 //	public void TestLoginTagService(UserVo userVo) {
 //
-//		tagService.LoginUpdateTagService(userVo);
+//		tagService.loginUpdateTagService(userVo);
 //
 //	}
 

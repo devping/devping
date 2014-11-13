@@ -41,15 +41,15 @@ public class CsTestController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login() {
-        UserVo userVo = new UserVo();
-        userVo.setName("Jooho Lee");
-        userVo.setUserId("ljhiyh");
-        userVo.setNickName("Jhouse");
-        HashSet<String> tagList = new HashSet<>();
-        tagList.add("java");
-        tagList.add("jboss");
-        userVo.setPersonalTagList(tagList);
-        httpSession.setAttribute("userVo",userVo);
+//        UserVo userVo = new UserVo();
+//        userVo.setName("Jooho Lee");
+//        userVo.setUserId("ljhiyh");
+//        userVo.setNickName("Jhouse");
+//        HashSet<String> tagList = new HashSet<>();
+//        tagList.add("java");
+//        tagList.add("jboss");
+//        userVo.setPersonalTagList(tagList);
+//        httpSession.setAttribute("userVo",userVo);
 
         return "/echo";
     }

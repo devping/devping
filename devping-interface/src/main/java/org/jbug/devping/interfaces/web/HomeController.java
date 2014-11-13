@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Set;
 
 /**
  * Handles requests for the application home page.
@@ -97,7 +98,9 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
         if (o != null && o instanceof UserVo) {
             user = (UserVo) o;
             //get details from model object
-            return user.getTags();
+            Set<String> personalTagList = user.getPersonalTagList();
+
+            return personalTagList.toString();
         }
 
         return "user load error";

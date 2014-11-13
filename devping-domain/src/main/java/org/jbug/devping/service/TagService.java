@@ -19,13 +19,13 @@ public class TagService {
     @Autowired
     TagStore tagStore;
 
-    public void LoginUpdateTagService(UserVo userVo) {
+    public void loginUpdateTagService(UserVo userVo) {
 
         System.out.println("in TagService");
 
         tagStore.addTagToTreeAndCache(userVo);
     }
-    public void LogoutUpdateTagService(UserVo userVo) {
+    public void logoutUpdateTagService(UserVo userVo) {
         tagStore.removeUserFromTag(userVo);
     }
 

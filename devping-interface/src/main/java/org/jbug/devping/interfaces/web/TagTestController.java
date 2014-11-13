@@ -44,16 +44,16 @@ public class TagTestController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login() {
-        UserVo userVo = new UserVo();
-        userVo.setName("Jooho Lee");
-        userVo.setUserId("ljhiyh");
-        userVo.setNickName("Jhouse");
-        HashSet<String> tagList = new HashSet<>();
-        tagList.add("java");
-        tagList.add("jboss");
-        userVo.setPersonalTagList(tagList);
-        httpSession.setAttribute("userVo",userVo);
-
+//        UserVo userVo = new UserVo();
+//        userVo.setName("Jooho Lee");
+//        userVo.setUserId("ljhiyh");
+//        userVo.setNickName("Jhouse");
+//        HashSet<String> tagList = new HashSet<>();
+//        tagList.add("java");
+//        tagList.add("jboss");
+//        userVo.setPersonalTagList(tagList);
+//        httpSession.setAttribute("userVo",userVo);
+//
         return "/echo";
     }
 
@@ -70,11 +70,13 @@ public class TagTestController {
             personalTag.add(stringTokenizer.nextToken());
         }
 
-        UserVo userVo = new UserVo();
-        userVo.setName(id);
-        userVo.setPersonalTagList(personalTag);
+        UserVo userVo = UserVo.getBuilder()
+            .userId(id)
+            .password("123")
+            .personalTagList(personalTag)
+            .build();
         TestUserVo.put(id, userVo);
-        tagService.LoginUpdateTagService(userVo);
+        tagService.loginUpdateTagService(userVo);
 
         //결과값 확인( prefix )
         TreeSet<String> tagListWithJ = tagService.findTagWithPrefix("j");
@@ -101,7 +103,7 @@ public class TagTestController {
     public ModelAndView logoutUpdateTagTest(String id) {
         UserVo userVo = TestUserVo.get(id);
 
-        tagService.LogoutUpdateTagService(userVo);
+        tagService.logoutUpdateTagService(userVo);
 
         //결과값 확인( prefix )
         TreeSet<String> tagListWithJ = tagService.findTagWithPrefix("j");
