@@ -45,6 +45,7 @@ public class RepositoryUserService implements UserService {
                 .email(userAccountData.getEmail())
                 .firstName(userAccountData.getFirstName())
                 .lastName(userAccountData.getLastName())
+                .tags(userAccountData.getTags())
                 .password(encodedPassword);
 
         if (userAccountData.isSocialSignIn()) {

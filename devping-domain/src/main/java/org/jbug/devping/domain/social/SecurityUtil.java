@@ -23,6 +23,7 @@ public class SecurityUtil {
                 .password(user.getPassword())
                 .role(user.getRole())
                 .socialSignInProvider(user.getSignInProvider())
+                .tags(user.getTags())
                 .username(user.getEmail())
                 .build();
         LOGGER.debug("Logging in principal: {}", userDetails);

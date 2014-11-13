@@ -119,7 +119,7 @@ public class RegistrationController {
         //do anything.
         ProviderSignInUtils.handlePostSignUp(registered.getEmail(), request);
 
-        return "login";
+        return "home";
     }
 
     /**

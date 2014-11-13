@@ -70,7 +70,7 @@
             <div class="row social-button-row">
                 <div class="col-lg-4">
                     <form id="google" action="/auth/google" method="POST">
-                        <input type="hidden" name="scope" value="email" />
+                        <input type="hidden" name="scope" value="openid profile email" />
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <input type="hidden" name="redirect_uri" value="http://devping.com:8080/auth/google"/>
                         <button type="submit" class="btn btn-lg btn-google"><i class="fa fa-google-plus"></i> | Sign Up with Google</button></a><br />

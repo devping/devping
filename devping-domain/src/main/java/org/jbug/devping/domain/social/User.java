@@ -27,6 +27,9 @@ public class User extends BaseEntity<Long> {
     @Column(name = "password", length = 255)
     private String password;
 
+    @Column(name = "tags", length = 255)
+    private String tags;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "role", length = 20, nullable = false)
     private Role role;
@@ -68,6 +71,10 @@ public class User extends BaseEntity<Long> {
         return role;
     }
 
+    public String getTags() {
+        return tags;
+    }
+
     public SocialMediaService getSignInProvider() {
         return signInProvider;
     }
@@ -80,6 +87,7 @@ public class User extends BaseEntity<Long> {
                 .append("email", email)
                 .append("firstName", firstName)
                 .append("lastName", lastName)
+                .append("tags", tags)
                 .append("modificationTime", this.getModificationTime())
                 .append("signInProvider", this.getSignInProvider())
                 .append("version", this.getVersion())
@@ -112,6 +120,11 @@ public class User extends BaseEntity<Long> {
 
         public Builder password(String password) {
             user.password = password;
+            return this;
+        }
+
+        public Builder tags(String tags) {
+            user.tags = tags;
             return this;
         }
 

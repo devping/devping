@@ -38,6 +38,8 @@ public class RegistrationForm {
     @Size(max = 100)
     private String lastName;
 
+    private String tags;
+
     private String password;
 
     private String passwordVerification;
@@ -62,6 +64,14 @@ public class RegistrationForm {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
     public String getFirstName() {

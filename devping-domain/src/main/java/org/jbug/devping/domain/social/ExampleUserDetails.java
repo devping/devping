@@ -20,6 +20,8 @@ public class ExampleUserDetails extends SocialUser {
 
     private String lastName;
 
+    private String tags;
+
     private Role role;
 
     private SocialMediaService socialSignInProvider;
@@ -44,6 +46,10 @@ public class ExampleUserDetails extends SocialUser {
         return lastName;
     }
 
+    public String getTags() {
+        return tags;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -59,6 +65,7 @@ public class ExampleUserDetails extends SocialUser {
                 .append("username", getUsername())
                 .append("firstName", firstName)
                 .append("lastName", lastName)
+                .append("tags", tags)
                 .append("role", role)
                 .append("socialSignInProvider", socialSignInProvider)
                 .toString();
@@ -75,6 +82,8 @@ public class ExampleUserDetails extends SocialUser {
         private String lastName;
 
         private String password;
+
+        private String tags;
 
         private Role role;
 
@@ -129,6 +138,12 @@ public class ExampleUserDetails extends SocialUser {
             return this;
         }
 
+
+        public Builder tags(String tags) {
+            this.tags = tags;
+            return this;
+        }
+
         public ExampleUserDetails build() {
             ExampleUserDetails user = new ExampleUserDetails(username, password, authorities);
 
@@ -136,6 +151,7 @@ public class ExampleUserDetails extends SocialUser {
             user.firstName = firstName;
             user.lastName = lastName;
             user.role = role;
+            user.tags = tags;
             user.socialSignInProvider = socialSignInProvider;
 
             return user;
