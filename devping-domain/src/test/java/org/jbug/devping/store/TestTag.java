@@ -128,7 +128,7 @@ public class TestTag {
                 userListforTag = new TreeSet<>();
             }
             // update this user to userList
-            userListforTag.add(userVo.getName());
+            userListforTag.add(userVo.getUserId());
             // update userList for the store
             ITagCache.put(key, userListforTag);
         }
@@ -164,17 +164,20 @@ public class TestTag {
         tag3.add("wildfly");
         tag3.add("레드");
 
-        UserVo user1 = new UserVo();
-        user1.setName("ljhiyh");
-        user1.setPersonalTagList(tag1);
+        UserVo user1 = new UserVo.Builder()
+                .userId("ljhiyh")
+                .personalTagList(tag1)
+                .build();
 
-        UserVo user2 = new UserVo();
-        user2.setName("jhouse");
-        user2.setPersonalTagList(tag2);
+        UserVo user2 =  new UserVo.Builder()
+                .userId("jhouse")
+                .personalTagList(tag2)
+                .build();
 
-        UserVo user3 = new UserVo();
-        user3.setName("jooho");
-        user3.setPersonalTagList(tag3);
+        UserVo user3 = new UserVo.Builder()
+                .userId("jooho")
+                .personalTagList(tag3)
+                .build();
 
         testUserTagList.put("ljhiyh", user1);
         testUserTagList.put("jhouse", user2);

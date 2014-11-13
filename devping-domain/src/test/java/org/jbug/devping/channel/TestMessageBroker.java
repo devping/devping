@@ -13,8 +13,8 @@ public class TestMessageBroker {
 
     @Test
     public void testGenerateChannelID() {
-        UserVo uv = new UserVo();
-        uv.setName("ljhiyh");
+        UserVo uv = new UserVo.Builder()
+        .userId("ljhiyh").build();
         assertNotNull(mb.generateChannelId(uv));
 
     }
