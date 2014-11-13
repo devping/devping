@@ -35,6 +35,13 @@ public class TagTestController {
         return "/echo";
     }
 
+    @RequestMapping(value = "/mqtt", method = RequestMethod.GET)
+    public String hiveQ() {
+        return "/hiveQ";
+    }
+
+
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login() {
         UserVo userVo = new UserVo();

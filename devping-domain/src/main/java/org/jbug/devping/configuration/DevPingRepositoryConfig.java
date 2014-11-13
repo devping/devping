@@ -1,11 +1,10 @@
 package org.jbug.devping.configuration;
 
-import org.apache.commons.dbcp.BasicDataSource;
-import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -31,18 +30,24 @@ public class DevPingRepositoryConfig {
 
     @Bean
     public DataSource dataSource() {
-        BasicDataSource dataSource = new BasicDataSource();
-
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost/devping");
-        dataSource.setUsername("devping");
-        dataSource.setPassword("devping");
+//        BasicDataSource dataSource = new BasicDataSource();
+//
+//        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+//        dataSource.setUrl("jdbc:mysql://localhost/devping");
+//        dataSource.setUsername("devping");
+//        dataSource.setPassword("devping");
 //
 //        dataSource.setDriverClassName(env.getRequiredProperty("db.driver"));
 //        dataSource.setUrl(env.getRequiredProperty("db.url"));
 //        dataSource.setUsername(env.getRequiredProperty("db.username"));
 //        dataSource.setPassword(env.getRequiredProperty("db.password"));
 
+//        JndiObjectFactoryBean dataSource = new JndiObjectFactoryBean();
+//        dataSource.setJndiName("java:/jboss/mariads");
+
+        final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
+        dsLookup.setResourceRef(true);
+        DataSource dataSource = dsLookup.getDataSource("jboss/mariads");
 
 
         return dataSource;
