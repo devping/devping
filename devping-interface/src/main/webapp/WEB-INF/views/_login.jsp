@@ -16,33 +16,40 @@
 </head>
 <body>
 	<section class="container">
-		<form class="jb-c-form-signin" method="post" action="/main">
 			<h2 class="jb-c-form-signin-heading">DevPing</h2>
+        <div id="social" class="jb-c-form-signin">
 			<div class="jb-c-login-wrap jb-c-login-social-link">
 				<span>소셜 계정으로 로그인하기</span>
-				<a href="index.html" class="jb-c-facebook">
-					Facebook
-				</a>
-				<a href="index.html" class="jb-c-twitter">
-					Google
-				</a>
+                <form id="facebook" method="post" action="/auth/facebook">
+                    <a href="index.html" class="jb-c-facebook">
+                        Facebook
+                    </a>
+                </form>
+                <form id="google" method="post" action="/auth/google">
+                    <a href="index.html" class="jb-c-twitter">
+                        Google
+                    </a>
+                </form>
 			</div>
-			<span>or</span>
-			<div class="jb-c-login-wrap">
-				<span>DevPing 계정으로 로그인하기</span>
-				<input type="hidden" id="type" name="type" value="login">
-				<input type="text" class="form-control" id="username" name="username" placeholder="아이디" autofocus="autofocus">
-				<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호">
-				<button class="btn btn-lg btn-login btn-block" type="submit">로그인</button>
-			</div>
-			<div class="jb-c-registration">
-				<a data-toggle="modal" data-target="#registrationModal">회원가입</a>
+            <span>or</span>
+            <form id="devping" method="post" action="${pageContext.request.contextPath}/signin/authenticate">
+                <div class="jb-c-login-wrap">
+                    <span>DevPing 계정으로 로그인하기</span>
+                    <input type="hidden" id="type" name="type" value="login">
+                    <input type="text" class="form-control" id="user-email" name="username" placeholder="아이디" autofocus="autofocus">
+                    <input type="password" class="form-control" id="user-password" name="password" placeholder="비밀번호">
+                    <button class="btn btn-lg btn-login btn-block" type="submit">로그인</button>
+                </div>
+            </form>
+
+            <div class="jb-c-registration">
+                <a data-toggle="modal" data-target="#registrationModal">회원가입</a>
 				<span class="pull-right">
 					<a>아이디찾기</a>
 					<a>비밀번호찾기</a>
 				</span>
-			</div>
-		</form>
+            </div>
+        </div>
 	</section>
 	
 	<!-- Modal -->
