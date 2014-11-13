@@ -7,10 +7,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
@@ -88,7 +92,8 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
     }
 
     @RequestMapping(value = "/loaduser", method = RequestMethod.GET)
-    public @ResponseBody String test1(Locale locale, Model model, HttpServletRequest request) {
+    public @ResponseBody
+    Set<String> test1(Locale locale, Model model, HttpServletRequest request) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Object o = (auth != null) ? auth.getPrincipal() :  null;
@@ -98,12 +103,10 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
         if (o != null && o instanceof UserVo) {
             user = (UserVo) o;
             //get details from model object
-            Set<String> personalTagList = user.getPersonalTagList();
-
-            return personalTagList.toString();
+            return user.getPersonalTagList();
         }
 
-        return "user load error";
+        return new HashSet<>();
     }
 
 
