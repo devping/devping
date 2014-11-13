@@ -1,9 +1,6 @@
 package org.jbug.devping.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Created by jhouse on 10/12/14.
@@ -23,6 +20,15 @@ public class StringUtil {
             arrayList.add(stringTokenizer.nextToken());
         }
         return arrayList;
+    }
+
+    public static Set<String> arrayToSet(String array,String delimeter){
+        Set<String> arraySet = new HashSet<>();
+        StringTokenizer stringTokenizer = new StringTokenizer(array,delimeter);
+        while (stringTokenizer.hasMoreTokens()) {
+            arraySet.add(stringTokenizer.nextToken());
+        }
+        return arraySet;
     }
 
     public static List<String> arrayToList(String array){

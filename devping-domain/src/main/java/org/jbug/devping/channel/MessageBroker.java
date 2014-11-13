@@ -14,7 +14,7 @@ public class MessageBroker {
     public String generateChannelId(UserVo userVo) {
 
         StringBuilder channelIdBuilder = new StringBuilder();
-        channelIdBuilder.append(userVo.getName());
+        channelIdBuilder.append(userVo.getUserId());
         channelIdBuilder.append("_");
         channelIdBuilder.append(NumberUtil.randomInteger(0, 10000000));
 

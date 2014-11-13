@@ -1,6 +1,7 @@
 package org.jbug.devping.interfaces.web;
 
 import org.jbug.devping.domain.social.*;
+import org.jbug.devping.service.TagService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,9 @@ public class RegistrationController {
     protected static final String VIEW_NAME_REGISTRATION_PAGE = "registrationForm";
 
     private UserService service;
+
+    @Autowired
+    private TagService tagService;
 
     @Autowired
     public RegistrationController(UserService service) {

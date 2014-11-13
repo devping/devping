@@ -25,7 +25,7 @@ public class TagStore {
     public void addTagToTreeAndCache(UserVo userVo) {
         System.out.println("In tagStore");
         Set<String> userListForTag;
-        String userName = userVo.getName();
+        String userName = userVo.getUserId();
         for (String tag : userVo.getPersonalTagList()) {
             tagTree.put(tag, tag);
             userListForTag = tagCache.get(tag);
@@ -45,7 +45,7 @@ public class TagStore {
 
     public void removeUserFromTag(UserVo userVo) {
         Set<String> userListForTag;
-        String userName = userVo.getName();
+        String userName = userVo.getUserId();
         for (String tag : userVo.getPersonalTagList()) {
             userListForTag = tagCache.get(tag);
             if (userListForTag == null) {

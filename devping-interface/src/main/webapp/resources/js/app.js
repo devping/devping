@@ -1,6 +1,6 @@
 //setInterval(function () {alert("Hello")}, 3000);
 
-var urlBase = "/devping-interface/"; 
+var urlBase = "/";
 
 var devPingApp = angular.module('devPingApp', ['ngRoute']);
 

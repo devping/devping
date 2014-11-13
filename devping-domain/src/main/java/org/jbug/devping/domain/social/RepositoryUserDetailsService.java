@@ -1,5 +1,7 @@
 package org.jbug.devping.domain.social;
 
+import org.jbug.devping.utils.StringUtil;
+import org.jbug.devping.vo.UserVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,15 +40,15 @@ public class RepositoryUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("No user found with username: " + username);
         }
 
-        ExampleUserDetails principal = ExampleUserDetails.getBuilder()
+        UserVo principal = UserVo.getBuilder()
                 .firstName(user.getFirstName())
                 .id(user.getId())
                 .lastName(user.getLastName())
                 .password(user.getPassword())
                 .role(user.getRole())
                 .socialSignInProvider(user.getSignInProvider())
-                .username(user.getEmail())
-                .tags(user.getTags())
+                .userId(user.getEmail())
+                .personalTagList(StringUtil.arrayToSet(user.getTags(), ","))
                 .build();
 
         LOGGER.debug("Returning user details: {}", principal);
