@@ -209,10 +209,10 @@
 <body>
 <div>
     <div id="connect-container">
-        <input id="radio1" type="radio" name="group1" onclick="updateUrl('/devping-interface/ws/echo');">
+        <input id="radio1" type="radio" name="group1" onclick="updateUrl('/echo');">
             <label for="radio1">W3C WebSocket</label>
         <br>
-        <input id="radio2" type="radio" name="group1" onclick="updateUrl('/devping-interface/ws/socketjs/echo');">
+        <input id="radio2" type="radio" name="group1" onclick="updateUrl('/socketjs/echo');">
             <label for="radio2">SockJS</label>
         <div id="sockJsTransportSelect" style="visibility:hidden;">
             <span>SockJS transport:</span>

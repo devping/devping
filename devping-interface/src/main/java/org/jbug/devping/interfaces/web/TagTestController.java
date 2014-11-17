@@ -77,10 +77,11 @@ public class TagTestController {
                 .userId(id)
                 .firstName("Jooho")
                 .lastName("Lee")
+                .password("123")
                 .personalTagList(personalTag)
                 .build();
         TestUserVo.put(id, userVo);
-        tagService.LoginUpdateTagService(userVo);
+        tagService.loginUpdateTagService(userVo);
 
         //결과값 확인( prefix )
         TreeSet<String> tagListWithJ = tagService.findTagWithPrefix("j");
@@ -107,7 +108,7 @@ public class TagTestController {
     public ModelAndView logoutUpdateTagTest(String id) {
         UserVo userVo = TestUserVo.get(id);
 
-        tagService.LogoutUpdateTagService(userVo);
+        tagService.logoutUpdateTagService(userVo);
 
         //결과값 확인( prefix )
         TreeSet<String> tagListWithJ = tagService.findTagWithPrefix("j");

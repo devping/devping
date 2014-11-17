@@ -65,7 +65,7 @@ devPingApp.factory('MyService', ['$q', '$rootScope', function($q, $rootScope) {
 	// Create a unique callback ID to map requests to responses
 	var currentCallbackId = 0;
 	// Create our websocket object with the address to the websocket
-	var ws = new WebSocket("ws://localhost:8000/socket/");
+	var ws = new WebSocket("ws://devping:8080/echo/");
 
 	ws.onopen = function(){  
 		console.log("Socket has been opened!");  

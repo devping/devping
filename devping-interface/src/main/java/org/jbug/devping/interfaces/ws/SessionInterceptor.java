@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
@@ -23,14 +25,14 @@ public class SessionInterceptor implements HandshakeInterceptor {
        logger.debug("Before Handshake");
        System.out.println("Before Handshake");
 
-        if (request instanceof ServletServerHttpRequest) {
-            ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
-            HttpSession session = servletRequest.getServletRequest().getSession(false);
-            if (session != null) {
-                UserVo userVo = (UserVo) session.getAttribute("userVo");
-                attributes.put("userId", userVo.getUserId());
-                System.out.println(userVo.getUserId());
-            }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Object o = (auth != null) ? auth.getPrincipal() :  null;
+
+        UserVo user = null;
+
+        if (o != null && o instanceof UserVo) {
+            user = (UserVo) o;
+            attributes.put("userId", user.getUserId());
         }
 
         return true;

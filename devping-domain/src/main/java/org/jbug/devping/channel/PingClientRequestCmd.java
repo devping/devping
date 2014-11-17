@@ -16,8 +16,7 @@ import java.util.Date;
  */
 public class PingClientRequestCmd implements Commander{
 
-    @Autowired
-    WSSessionManagerService wsSessionManagerService;
+    WSSessionManagerService wsSessionManagerService = new WSSessionManagerService();
 
     PingToServerRequsetVo pingToServerRequsetVo =null;
     String pongUser ;

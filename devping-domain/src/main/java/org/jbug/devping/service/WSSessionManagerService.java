@@ -14,8 +14,7 @@ import java.io.IOException;
 @Service
 public class WSSessionManagerService {
 
-    @Autowired
-    WSSessionManager cm;
+    WSSessionManager cm = new WSSessionManager();
 
     public void put(String userId, WebSocketSession session){
         try {
