@@ -168,17 +168,17 @@ public class TestTag {
 
 
 
-        UserVo user1 = UserVo.getBuilder()
+        UserVo user1 = UserVo.builder()
                 .email("ljhiyh")
                 .tags(StringUtils.collectionToCommaDelimitedString(tag1))
                 .build();
 
-        UserVo user2 =  UserVo.getBuilder()
+        UserVo user2 =  UserVo.builder()
                 .email("jhouse")
                 .tags(StringUtils.collectionToCommaDelimitedString(tag2))
                 .build();
 
-        UserVo user3 = UserVo.getBuilder()
+        UserVo user3 = UserVo.builder()
                 .email("jooho")
                 .tags(StringUtils.collectionToCommaDelimitedString(tag3))
                 .build();

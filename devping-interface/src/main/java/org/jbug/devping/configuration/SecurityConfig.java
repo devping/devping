@@ -39,23 +39,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http
-                    .csrf().disable()
-                    //Configures form login
-                    .formLogin()
-                    .loginPage("/signin")
-                    .loginProcessingUrl("/signin/authenticate")
-                    .failureUrl("/signin?error=bad_credentials")
-                            //Configures the logout function
-                    .and()
-                    .logout()
-                    .deleteCookies("JSESSIONID")
-                    .logoutUrl("/logout")
-                    .logoutSuccessUrl("/signin")
-                        //Configures url based authorization
+                .csrf().disable()
+                //Configures form login
+                .formLogin()
+                .loginPage("/signin")
+                .loginProcessingUrl("/signin/authenticate")
+                .failureUrl("/signin?error=bad_credentials")
+                        //Configures the logout function
+                .and()
+                .logout()
+                .deleteCookies("JSESSIONID")
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/signin")
+                    //Configures url based authorization
                 .and()
                 .authorizeRequests()
                         //Anyone can access the urls
                 .antMatchers(
+//                          "/**"
+
                         "/auth/**",
                         "/signin",
                         "/signup/**",

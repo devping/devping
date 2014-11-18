@@ -47,7 +47,7 @@ public class CsTestController {
         tagList.add("java");
         tagList.add("jboss");
 
-        UserVo userVo = UserVo.getBuilder()
+        UserVo userVo = UserVo.builder()
                 .email("ljhiyh")
                 .firstName("Jooho")
                 .lastName("Lee")

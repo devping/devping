@@ -49,7 +49,7 @@ public class TagTestController {
         tagList.add("java");
         tagList.add("jboss");
 
-        UserVo userVo = UserVo.getBuilder()
+        UserVo userVo = UserVo.builder()
                 .email("ljhiyh")
                 .firstName("Jooho")
                 .lastName("Lee")
@@ -74,7 +74,7 @@ public class TagTestController {
             personalTag.add(stringTokenizer.nextToken());
         }
 
-        UserVo userVo = UserVo.getBuilder()
+        UserVo userVo = UserVo.builder()
                 .email(id)
                 .firstName("Jooho")
                 .lastName("Lee")

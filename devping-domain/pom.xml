@@ -434,6 +434,13 @@
             <version>3.0.0.GA</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.14.8</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- TESTING DEPENDENCIES -->
         <!--<dependency>-->
         <!--<groupId>org.assertj</groupId>-->

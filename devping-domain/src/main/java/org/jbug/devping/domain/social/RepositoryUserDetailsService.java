@@ -38,6 +38,7 @@ public class RepositoryUserDetailsService implements UserDetailsService {
         LOGGER.debug("Loading user by username: {}", username);
 
         UserVo user = repository.findByEmail(username);
+//        user.setRole(Role.USER);
         LOGGER.debug("Found user: {}", user);
 
         if (user == null) {

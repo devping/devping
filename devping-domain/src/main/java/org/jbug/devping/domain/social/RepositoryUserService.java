@@ -43,22 +43,18 @@ public class RepositoryUserService implements UserService {
 
         String encodedPassword = encodePassword(userAccountData);
 
-        UserVo.Builder user = UserVo.getBuilder()
+        UserVo user = UserVo.builder()
                 .email(userAccountData.getEmail())
                 .firstName(userAccountData.getFirstName())
                 .lastName(userAccountData.getLastName())
                 .tags(userAccountData.getTags())
-                .password(encodedPassword);
+                .password(encodedPassword)
+                .socialSignInProvider(userAccountData.isSocialSignIn()?userAccountData.getSignInProvider():null)
+                .build();
 
-        if (userAccountData.isSocialSignIn()) {
-            user.socialSignInProvider(userAccountData.getSignInProvider());
-        }
+        LOGGER.debug("Persisting new user with information: {}", user);
 
-        UserVo registered = user.build();
-
-        LOGGER.debug("Persisting new user with information: {}", registered);
-
-        return repository.save(registered);
+        return repository.save(user);
     }
 
 
