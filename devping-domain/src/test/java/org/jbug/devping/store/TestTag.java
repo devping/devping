@@ -4,12 +4,14 @@ import edu.princeton.cs.algs4.TST;
 import org.jbug.devping.cache.ITagCache;
 import org.jbug.devping.configuration.DevPingCacheConfig;
 import org.jbug.devping.configuration.DevPingDomainApplicationContextConfiguration;
-import org.jbug.devping.vo.UserVo;
+import org.jbug.devping.domain.UserVo;
+import org.jbug.devping.utils.StringUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 
@@ -121,7 +123,7 @@ public class TestTag {
 
         Set<String> userListforTag;
 
-        for (String key : userVo.getPersonalTagList()) {
+        for (String key : StringUtils.commaDelimitedListToSet(userVo.getTags())) {
             tagTree.put(key, key);
             userListforTag = (Set<String>) ITagCache.get(key);
             if (userListforTag == null) {
@@ -164,19 +166,21 @@ public class TestTag {
         tag3.add("wildfly");
         tag3.add("레드");
 
+
+
         UserVo user1 = UserVo.getBuilder()
-                .userId("ljhiyh")
-                .personalTagList(tag1)
+                .email("ljhiyh")
+                .tags(StringUtils.collectionToCommaDelimitedString(tag1))
                 .build();
 
         UserVo user2 =  UserVo.getBuilder()
-                .userId("jhouse")
-                .personalTagList(tag2)
+                .email("jhouse")
+                .tags(StringUtils.collectionToCommaDelimitedString(tag2))
                 .build();
 
         UserVo user3 = UserVo.getBuilder()
-                .userId("jooho")
-                .personalTagList(tag3)
+                .email("jooho")
+                .tags(StringUtils.collectionToCommaDelimitedString(tag3))
                 .build();
 
         testUserTagList.put("ljhiyh", user1);

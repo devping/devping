@@ -2,7 +2,7 @@ package org.jbug.devping.store;
 
 import org.jbug.devping.configuration.DevPingCacheConfig;
 import org.jbug.devping.configuration.DevPingDomainApplicationContextConfiguration;
-import org.jbug.devping.vo.UserVo;
+import org.jbug.devping.domain.UserVo;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

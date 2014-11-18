@@ -1,5 +1,6 @@
 package org.jbug.devping.interfaces.web;
 
+import org.jbug.devping.domain.UserVo;
 import org.jbug.devping.domain.social.*;
 import org.jbug.devping.service.TagService;
 import org.slf4j.Logger;
@@ -105,7 +106,7 @@ public class RegistrationController {
 
         LOGGER.debug("No validation errors found. Continuing registration process.");
 
-        User registered = createUserAccount(userAccountData, result);
+        UserVo registered = createUserAccount(userAccountData, result);
 
         //If email address was already found from the database, render the form view.
         if (registered == null) {
@@ -122,7 +123,7 @@ public class RegistrationController {
         //If the user is signing in by using a social provider, this method call stores
         //the connection to the UserConnection table. Otherwise, this method does not
         //do anything.
-        ProviderSignInUtils.handlePostSignUp(registered.getEmail(), request);
+        ProviderSignInUtils.handlePostSignUp(registered.getUserId(), request);
 
         return "home";
     }
@@ -131,9 +132,9 @@ public class RegistrationController {
      * Creates a new user account by calling the service method. If the email address is found
      * from the database, this method adds a field error to the email field of the form object.
      */
-    private User createUserAccount(RegistrationForm userAccountData, BindingResult result) {
+    private UserVo createUserAccount(RegistrationForm userAccountData, BindingResult result) {
         LOGGER.debug("Creating user account with information: {}", userAccountData);
-        User registered = null;
+        UserVo registered = null;
 
         try {
             registered = service.registerNewUserAccount(userAccountData);

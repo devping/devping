@@ -1,7 +1,7 @@
 package org.jbug.devping.service;
 
 import org.jbug.devping.store.TagStore;
-import org.jbug.devping.vo.UserVo;
+import org.jbug.devping.domain.UserVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

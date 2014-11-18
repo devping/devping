@@ -2,9 +2,10 @@ package org.jbug.devping.store;
 
 import edu.princeton.cs.algs4.TST;
 import org.jbug.devping.cache.ITagCache;
-import org.jbug.devping.vo.UserVo;
+import org.jbug.devping.domain.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
 
@@ -24,9 +25,11 @@ public class TagStore {
 
     public void addTagToTreeAndCache(UserVo userVo) {
         System.out.println("In tagStore");
-        Set<String> userListForTag;
+
         String userName = userVo.getUserId();
-        for (String tag : userVo.getPersonalTagList()) {
+        Set<String> userListForTag;
+
+        for (String tag : StringUtils.commaDelimitedListToSet(userVo.getTags())) {
             tagTree.put(tag, tag);
             userListForTag = tagCache.get(tag);
             if (userListForTag == null) {
@@ -46,7 +49,7 @@ public class TagStore {
     public void removeUserFromTag(UserVo userVo) {
         Set<String> userListForTag;
         String userName = userVo.getUserId();
-        for (String tag : userVo.getPersonalTagList()) {
+        for (String tag : StringUtils.commaDelimitedListToSet(userVo.getTags())) {
             userListForTag = tagCache.get(tag);
             if (userListForTag == null) {
                 userListForTag = new TreeSet<>();

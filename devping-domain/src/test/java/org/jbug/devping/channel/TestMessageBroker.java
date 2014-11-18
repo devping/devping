@@ -1,6 +1,6 @@
 package org.jbug.devping.channel;
 
-import org.jbug.devping.vo.UserVo;
+import org.jbug.devping.domain.UserVo;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
@@ -14,7 +14,7 @@ public class TestMessageBroker {
     @Test
     public void testGenerateChannelID() {
         UserVo uv = new UserVo.Builder()
-        .userId("ljhiyh").build();
+        .email("ljhiyh").build();
         assertNotNull(mb.generateChannelId(uv));
 
     }

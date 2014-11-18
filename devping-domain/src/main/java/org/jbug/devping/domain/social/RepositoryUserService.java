@@ -4,12 +4,14 @@ package org.jbug.devping.domain.social;
  * Created by nadal on 14. 10. 6.
  */
 
+import org.jbug.devping.domain.UserVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 
 @Service
@@ -29,7 +31,7 @@ public class RepositoryUserService implements UserService {
 
     @Transactional
     @Override
-    public User registerNewUserAccount(RegistrationForm userAccountData) throws DuplicateEmailException {
+    public UserVo registerNewUserAccount(RegistrationForm userAccountData) throws DuplicateEmailException {
         LOGGER.debug("Registering new user account with information: {}", userAccountData);
 
         if (emailExist(userAccountData.getEmail())) {
@@ -41,7 +43,7 @@ public class RepositoryUserService implements UserService {
 
         String encodedPassword = encodePassword(userAccountData);
 
-        User.Builder user = User.getBuilder()
+        UserVo.Builder user = UserVo.getBuilder()
                 .email(userAccountData.getEmail())
                 .firstName(userAccountData.getFirstName())
                 .lastName(userAccountData.getLastName())
@@ -49,20 +51,22 @@ public class RepositoryUserService implements UserService {
                 .password(encodedPassword);
 
         if (userAccountData.isSocialSignIn()) {
-            user.signInProvider(userAccountData.getSignInProvider());
+            user.socialSignInProvider(userAccountData.getSignInProvider());
         }
 
-        User registered = user.build();
+        UserVo registered = user.build();
 
         LOGGER.debug("Persisting new user with information: {}", registered);
 
         return repository.save(registered);
     }
 
+
+
     private boolean emailExist(String email) {
         LOGGER.debug("Checking if email {} is already found from the database.", email);
 
-        User user = repository.findByEmail(email);
+        UserVo user = repository.findByEmail(email);
 
         if (user != null) {
             LOGGER.debug("User account: {} found with email: {}. Returning true.", user, email);

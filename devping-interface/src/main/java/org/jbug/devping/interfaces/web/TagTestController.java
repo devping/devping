@@ -2,9 +2,10 @@ package org.jbug.devping.interfaces.web;
 
 import org.jbug.devping.service.TagService;
 import org.jbug.devping.utils.StringUtil;
-import org.jbug.devping.vo.UserVo;
+import org.jbug.devping.domain.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -49,10 +50,10 @@ public class TagTestController {
         tagList.add("jboss");
 
         UserVo userVo = UserVo.getBuilder()
-                .userId("ljhiyh")
+                .email("ljhiyh")
                 .firstName("Jooho")
                 .lastName("Lee")
-                .personalTagList(tagList)
+                .tags(StringUtils.collectionToCommaDelimitedString(tagList))
                 .build();
 
         httpSession.setAttribute("userVo",userVo);
@@ -74,11 +75,11 @@ public class TagTestController {
         }
 
         UserVo userVo = UserVo.getBuilder()
-                .userId(id)
+                .email(id)
                 .firstName("Jooho")
                 .lastName("Lee")
                 .password("123")
-                .personalTagList(personalTag)
+                .tags(StringUtils.collectionToCommaDelimitedString(personalTag))
                 .build();
         TestUserVo.put(id, userVo);
         tagService.loginUpdateTagService(userVo);

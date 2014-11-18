@@ -1,6 +1,7 @@
 package org.jbug.devping.interfaces.api;
 
 import org.jbug.devping.channel.ChannelService;
+import org.jbug.devping.domain.UserVo;
 import org.jbug.devping.service.TagService;
 import org.jbug.devping.utils.StringUtil;
 import org.jbug.devping.vo.*;
@@ -8,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,10 +48,10 @@ public class CsTestController {
         tagList.add("jboss");
 
         UserVo userVo = UserVo.getBuilder()
-                .userId("ljhiyh")
+                .email("ljhiyh")
                 .firstName("Jooho")
                 .lastName("Lee")
-                .personalTagList(tagList)
+                .tags(StringUtils.collectionToCommaDelimitedString(tagList))
                 .build();
         httpSession.setAttribute("userVo",userVo);
 

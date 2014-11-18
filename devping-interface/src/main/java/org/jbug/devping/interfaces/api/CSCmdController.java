@@ -2,7 +2,7 @@ package org.jbug.devping.interfaces.api;
 
 import org.jbug.devping.service.TagService;
 import org.jbug.devping.vo.TagPrefixVo;
-import org.jbug.devping.vo.UserVo;
+import org.jbug.devping.domain.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;

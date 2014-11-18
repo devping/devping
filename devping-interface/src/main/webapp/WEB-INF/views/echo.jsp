@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="org.jbug.devping.vo.UserVo" %>
+<%@ page import="org.jbug.devping.domain.UserVo" %>
 <html>
 <head>
     <title>WebSocket/SockJS Echo Sample (Adapted from Tomcat's echo sample)</title>

@@ -1,7 +1,7 @@
 package org.jbug.devping.channel;
 
 import org.jbug.devping.utils.NumberUtil;
-import org.jbug.devping.vo.UserVo;
+import org.jbug.devping.domain.UserVo;
 
 /**
  * Created by jhouse on 10/3/14.
