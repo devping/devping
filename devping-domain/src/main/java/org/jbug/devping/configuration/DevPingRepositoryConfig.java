@@ -35,7 +35,7 @@ public class DevPingRepositoryConfig {
         BasicDataSource dataSource = new BasicDataSource();
 
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost/devping");
+        dataSource.setUrl("jdbc:mysql://128.199.145.31/devping");
         dataSource.setUsername("devping");
         dataSource.setPassword("devping");
 
