@@ -49,12 +49,13 @@ public class TagTestController {
         tagList.add("java");
         tagList.add("jboss");
 
-        UserVo userVo = UserVo.builder()
-                .email("ljhiyh")
-                .firstName("Jooho")
-                .lastName("Lee")
-                .tags(StringUtils.collectionToCommaDelimitedString(tagList))
-                .build();
+        UserVo userVo = new UserVo();
+        userVo.setEmail("ljhiyh");
+        userVo.setFirstName("Jooho");
+        userVo.setLastName("Lee");
+        userVo.setPassword("123");
+        userVo.setTags(StringUtils.collectionToCommaDelimitedString(tagList));
+
 
         httpSession.setAttribute("userVo",userVo);
 
@@ -74,13 +75,12 @@ public class TagTestController {
             personalTag.add(stringTokenizer.nextToken());
         }
 
-        UserVo userVo = UserVo.builder()
-                .email(id)
-                .firstName("Jooho")
-                .lastName("Lee")
-                .password("123")
-                .tags(StringUtils.collectionToCommaDelimitedString(personalTag))
-                .build();
+        UserVo userVo = new UserVo();
+        userVo.setEmail(id);
+        userVo.setFirstName("Jooho");
+        userVo.setLastName("Lee");
+        userVo.setPassword("123");
+        userVo.setTags(StringUtils.collectionToCommaDelimitedString(personalTag));
         TestUserVo.put(id, userVo);
         tagService.loginUpdateTagService(userVo);
 
