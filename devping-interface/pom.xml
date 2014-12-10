@@ -15,7 +15,7 @@
 
         <spring.version>4.1.0.RELEASE</spring.version>
         <jstl.version>1.2</jstl.version>
-        <logback.version>1.1.1</logback.version>
+        <!--<logback.version>1.1.1</logback.version>-->
         <jcloverslf4j.version>1.7.6</jcloverslf4j.version>
 
         <spring.security.version>3.2.0.RELEASE</spring.security.version>
@@ -58,11 +58,11 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>org.logback-extensions</groupId>
-            <artifactId>logback-ext-spring</artifactId>
-            <version>0.1.1</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.logback-extensions</groupId>-->
+            <!--<artifactId>logback-ext-spring</artifactId>-->
+            <!--<version>0.1.1</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

@@ -1,13 +1,8 @@
 package org.jbug.devping.configuration;
 
-import ch.qos.logback.ext.spring.web.LogbackConfigListener;
-import com.google.common.base.Objects;
 import org.springframework.context.ApplicationContext;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.util.Assert;
 import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -51,10 +46,11 @@ public abstract class AbstractDevPingWebApplicationInitializer implements WebApp
             logbackOverride = "file:" + logbackOverride;
         }
 
-        String logbackConfig = Objects.firstNonNull(logbackOverride, LOGBACK_CONFIG_LOCATION_PARAM_VALUE);
+//        String logbackConfig = Objects.firstNonNull(logbackOverride, LOGBACK_CONFIG_LOCATION_PARAM_VALUE);
+        String logbackConfig = "WEB-INF/spring/logback/logback-develop.xml";
 
         servletContext.setInitParameter(LOGBACK_CONFIG_LOCATION_PARAM_NAME, logbackConfig);
-        servletContext.addListener(LogbackConfigListener.class);
+//        servletContext.addListener(LogbackConfigListener.class);
     }
 
     /**

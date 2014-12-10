@@ -1,5 +1,6 @@
 package org.jbug.devping.configuration;
 
+import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -30,12 +31,12 @@ public class DevPingRepositoryConfig {
 
     @Bean
     public DataSource dataSource() {
-//        BasicDataSource dataSource = new BasicDataSource();
+        BasicDataSource dataSource = new BasicDataSource();
 
-//        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-//        dataSource.setUrl("jdbc:mysql://128.199.145.31/devping");
-//        dataSource.setUsername("devping");
-//        dataSource.setPassword("devping");
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://128.199.145.31/devping");
+        dataSource.setUsername("devping");
+        dataSource.setPassword("devping");
 
 //        dataSource.setDriverClassName(env.getRequiredProperty("db.driver"));
 //        dataSource.setUrl(env.getRequiredProperty("db.url"));
@@ -45,9 +46,9 @@ public class DevPingRepositoryConfig {
 //        JndiObjectFactoryBean dataSource = new JndiObjectFactoryBean();
 //        dataSource.setJndiName("java:/jboss/mariads");
 
-        final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
-        dsLookup.setResourceRef(true);
-        DataSource dataSource = dsLookup.getDataSource("jboss/mariads");
+//        final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
+//        dsLookup.setResourceRef(true);
+//        DataSource dataSource = dsLookup.getDataSource("jboss/mariads");
 
 
 
