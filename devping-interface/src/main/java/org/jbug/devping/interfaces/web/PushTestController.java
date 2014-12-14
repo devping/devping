@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by kyungseopahn on 2014. 10. 14..
@@ -23,6 +24,7 @@ import java.util.Locale;
 public class PushTestController {
 
     private static final Logger logger = LoggerFactory.getLogger(PushTestController.class);
+    private static final int TTL = (int) TimeUnit.MINUTES.toSeconds(300);
 
     @RequestMapping(value = "/push", method = RequestMethod.GET)
     public String push(Locale locale, Model model, HttpServletRequest request) {
@@ -36,26 +38,35 @@ public class PushTestController {
 
         logger.info("/pushToMobile");
 
-        String message = request.getParameter("message");
         String deviceId = request.getParameter("deviceId");
-        String apiKey = request.getParameter("apiKey");
+        String text = "hahahah";
+        String apiKey = "";
+
+        logger.info(deviceId);
 
 
         try {
 
-            message = Util.URLEncode(message, "UTF-8");
-            final Message.Builder messageBuilder = new Message.Builder();
-            messageBuilder.addData("msg", message);
-            final Result result = new Sender(apiKey).send(messageBuilder.build(), deviceId, 5);
+            text = Util.URLEncode(text, "UTF-8");
+            final Message.Builder builder = new Message.Builder();
+            builder.collapseKey("announcement")
+                    .addData("action", "announcement")
+                    .addData("extraData", text)
+                    .timeToLive(TTL);
+
+            Message message = builder.build();
+            final Result result = new Sender(apiKey).sendNoRetry(message, deviceId);
             final String messageId = result.getMessageId();
 
-            //boolean success = (messageId != null);
+            boolean success = (messageId != null);
+
+            logger.info("" + success);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "hello";
+        return "push";
     }
 
 
