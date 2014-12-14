@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -85,4 +87,24 @@ public class TestJsonPaser {
         }
 
     }
+
+
+    @Test
+    public void deleteDB() throws Exception {
+
+        String myDriver="com.mysql.jdbc.Driver";
+        String myUrl="jdbc:mysql://128.199.145.31/devping";
+        Class.forName(myDriver);
+        Connection conn = DriverManager.getConnection(myUrl,"devping","devping");
+
+        java.sql.Statement stmt = null;
+        String query1 = "delete from UserConnection";
+        String query2 = "delete from user_accounts";
+        stmt = conn.createStatement();
+         stmt.execute(query1);
+         stmt.execute(query2);
+
+
+    }
+
 }

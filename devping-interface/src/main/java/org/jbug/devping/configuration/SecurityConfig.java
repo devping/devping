@@ -29,21 +29,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserRepository userRepository;
 
     @Override
-        public void configure(WebSecurity web) throws Exception {
-            web
-                    //Spring Security ignores request to static resources such as CSS or JS files.
-                    .ignoring()
-                    .antMatchers("/resources/**");
-        }
+    public void configure(WebSecurity web) throws Exception {
+        web
+                //Spring Security ignores request to static resources such as CSS or JS files.
+                .ignoring()
+                .antMatchers("/resources/**");
+    }
 
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
                 .csrf().disable()
                 //Configures form login
                 .formLogin()
                 .loginPage("/signin")
-                .loginProcessingUrl("/signin/authenticate")
+                .loginProcessingUrl("/authenticate")
                 .failureUrl("/signin?error=bad_credentials")
                         //Configures the logout function
                 .and()
@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/signin")
-                    //Configures url based authorization
+                        //Configures url based authorization
                 .and()
                 .authorizeRequests()
                         //Anyone can access the urls
@@ -65,6 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 ).permitAll()
                 //The rest of the our application is protected.
                 .antMatchers("/**").hasRole("USER")
+
                 //Adds the SocialAuthenticationFilter to Spring Security's filter chain.
 //                .and()
 //                .requiresChannel()

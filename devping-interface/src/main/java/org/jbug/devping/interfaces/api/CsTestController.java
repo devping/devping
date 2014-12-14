@@ -1,10 +1,13 @@
 package org.jbug.devping.interfaces.api;
 
-import org.jbug.devping.channel.ChannelService;
 import org.jbug.devping.domain.UserVo;
+import org.jbug.devping.service.ChannelService;
 import org.jbug.devping.service.TagService;
 import org.jbug.devping.utils.StringUtil;
-import org.jbug.devping.vo.*;
+import org.jbug.devping.vo.AdeptsSuggectionVo;
+import org.jbug.devping.vo.PingToServerRequsetVo;
+import org.jbug.devping.vo.PingToServerResponseVo;
+import org.jbug.devping.vo.TagPrefixVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,7 @@ import java.util.*;
 @Controller
 @RequestMapping(value = "/cs")
 public class CsTestController {
-	private static final Logger logger = LoggerFactory.getLogger(CsTestController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CsTestController.class);
 
     @Autowired
     HttpSession httpSession;
@@ -47,57 +50,60 @@ public class CsTestController {
         tagList.add("java");
         tagList.add("jboss");
 
-        UserVo userVo = UserVo.builder()
-                .email("ljhiyh")
-                .firstName("Jooho")
-                .lastName("Lee")
-                .tags(StringUtils.collectionToCommaDelimitedString(tagList))
-                .build();
+        UserVo userVo = new UserVo();
+        userVo.setEmail("ljhiyh");
+        userVo.setFirstName("Jooho");
+        userVo.setLastName("Lee");
+        userVo.setPassword("123");
+        userVo.setTags(StringUtils.collectionToCommaDelimitedString(tagList));
         httpSession.setAttribute("userVo",userVo);
 
         return "/echo";
     }
 
-	@RequestMapping(value = "/traceTagName.ajax", method = RequestMethod.POST)
-	public @ResponseBody TagPrefixVo traceTagName(@RequestBody TagPrefixVo data) {
-		logger.info(data.toString());
-		
-		logger.info("suggest tag list.");
+    @RequestMapping(value = "/traceTagName.ajax", method = RequestMethod.POST)
+    public @ResponseBody TagPrefixVo traceTagName(@RequestBody TagPrefixVo data) {
+        logger.info(data.toString());
+
+        logger.info("suggest tag list.");
         List<String> tagListWithPrefix = new ArrayList<>();
         TreeSet<String> tagTreeSetWithPrefix = tagService.findTagWithPrefix(data.getPrefix());
         tagListWithPrefix.addAll(tagTreeSetWithPrefix);
 
-		data.setTagList(tagListWithPrefix);
-		data.setDate((new Date()).toString());
+        data.setTagList(tagListWithPrefix);
+        data.setDate((new Date()).toString());
 
-		return data;
-	}
-	
-	@RequestMapping(value = "/searchUser.ajax", method = RequestMethod.POST)
-	public @ResponseBody AdeptsSuggectionVo searchAdepts(@RequestBody AdeptsSuggectionVo data) {
-		logger.info(data.toString());
-		
-		logger.info("provide expert list.");
+        return data;
+    }
+
+    @RequestMapping(value = "/searchUser.ajax", method = RequestMethod.POST)
+    public @ResponseBody AdeptsSuggectionVo searchAdepts(@RequestBody AdeptsSuggectionVo data) {
+        logger.info(data.toString());
+
+        logger.info("provide expert list.");
         TreeSet<String> selectedPeople = null;
         selectedPeople = tagService.findPeopleWithTagList(data.getTagList());
         data.setUserIdsWithTag(StringUtil.setToList(selectedPeople));
-		data.setTotalMembers("1");
-		data.setDate((new Date()).toString());
-		
-		return data;
-	}
-	
-	@RequestMapping(value = "/ping.ajax", method = RequestMethod.POST)
-	public @ResponseBody PingToServerResponseVo ping(@RequestBody PingToServerRequsetVo data) {
-		logger.info(data.toString());
-		
-		logger.info("send message by WebSocket.");
-		logger.info("make channel ID.");
+        data.setTotalMembers("1");
+        data.setDate((new Date()).toString());
+
+        return data;
+    }
+
+    @RequestMapping(value = "/ping.ajax", method = RequestMethod.POST)
+    public @ResponseBody PingToServerResponseVo ping(@RequestBody PingToServerRequsetVo data) {
+        logger.info(data.toString());
+
+        logger.info("send message by WebSocket.");
+        logger.info("make channel ID.");
+
 
         PingToServerResponseVo pingToServerResponseVo = channelService.ping(data);
 
+        return pingToServerResponseVo;
+    }
 
-		
-		return pingToServerResponseVo;
-	}
+
+
+
 }

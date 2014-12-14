@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
-import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -35,7 +34,7 @@ public class DevPingRepositoryConfig {
         BasicDataSource dataSource = new BasicDataSource();
 
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost/devping");
+        dataSource.setUrl("jdbc:mysql://128.199.145.31/devping");
         dataSource.setUsername("devping");
         dataSource.setPassword("devping");
 
@@ -50,6 +49,7 @@ public class DevPingRepositoryConfig {
 //        final JndiDataSourceLookup dsLookup = new JndiDataSourceLookup();
 //        dsLookup.setResourceRef(true);
 //        DataSource dataSource = dsLookup.getDataSource("jboss/mariads");
+
 
 
         return dataSource;
